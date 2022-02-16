@@ -11,3 +11,8 @@ The classifier can be trained by running all cells where data is provided as DAT
 studies in a directory above the model training notebook.
 
 To train the GAN use instructions from: https://github.com/lucidrains/stylegan2-pytorch which this training uses.
+
+
+To generate, move the checkpoint file you wish to generate from to models/default and name the model: model_NUMBER.pt
+
+stylegan2_pytorch --generate --load-from NUMBER --num-generate 1000
