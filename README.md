@@ -15,4 +15,4 @@ To train the GAN use instructions from: https://github.com/lucidrains/stylegan2-
 
 To generate, move the checkpoint file you wish to generate from to models/default and name the model: model_NUMBER.pt
 
-stylegan2_pytorch --generate --load-from NUMBER --num-generate 1000
+stylegan2_pytorch --generate --load-from NUMBER --num-generate NUMBER_OF_IMAGES_TO_GENERATE
