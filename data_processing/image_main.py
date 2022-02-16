@@ -48,6 +48,7 @@ annotations.index = annotations.loc[:, "image_id"]
 
 
 for file in os.listdir(directory):
+    print(file)
     if file == ".DS_Store":
         continue
     npy_image = convert_dicom_to_npy(directory+file, save=False)
