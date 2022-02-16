@@ -2,7 +2,9 @@
 
 Data from VinDr-SpineXR
 
-First pip install stylegan2 (below)
+To use baseline stylegan2 baseline GAN model for SpineGAN: (to generate normal and abnormal spine radiographs)
+
+pip install stylegan2_pytorch
 
 To prepare data from DICOM format run image_main.py which will convert DICOM to png form and preprocess (crop, downsample) the image.
 
