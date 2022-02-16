@@ -4,13 +4,13 @@
 # In[3]:
 
 
-local_directory = "/Users/ethanschonfeld/desktop/CS236G/data/test_images/"
+local_directory = "/Users/ethanschonfeld/desktop/CS236G/data/train_images/"
 
 
 # In[4]:
 
 
-virtual_directory = "/home/ethanschonfeld/cs236g/vindr/test_images/"
+virtual_directory = "/home/ethanschonfeld/cs236g/vindr/train_images/"
 
 
 # In[ ]:
@@ -39,7 +39,7 @@ else:
 # In[ ]:
 
 
-annotations = pd.read_csv(vindr_directory+"annotations/test.csv")
+annotations = pd.read_csv(vindr_directory+"annotations/train.csv")
 annotations.index = annotations.loc[:, "image_id"]
 
 
