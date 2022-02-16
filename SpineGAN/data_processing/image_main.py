@@ -25,6 +25,7 @@ vindr_directory = "/home/ethanschonfeld/cs236g/vindr/"
 from image_processing import *
 import os
 import torch
+import pandas as pd
 
 
 # In[ ]:
