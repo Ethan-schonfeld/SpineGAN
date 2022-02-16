@@ -3,7 +3,9 @@
 Data from VinDr-SpineXR
 
 First pip install stylegan2 (below)
+
 To prepare data from DICOM format run image_main.py which will convert DICOM to png form and preprocess (crop, downsample) the image.
+
 To run model as in the paper use:
 stylegan2_pytorch --data training_data/normal --aug-prob 0.25 --name normal-gan --results_dir ./normal_results --models_dir ./normal_models
 
