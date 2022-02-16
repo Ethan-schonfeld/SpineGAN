@@ -55,7 +55,7 @@ for file in os.listdir(directory):
         continue
     npy_image = crop_square(image=npy_image)
     npy_image = downsample_square_image(image=npy_image, desired_size=128)
-    image_id = file[:,-6]
+    image_id = file[:-6]
     if annotations[image_id, "lesion_type"] == "No finding":
         print("To normal:")
         save_as_png(image=npy_image, file_directory="/home/ethanschonfeld/cs236g/training_data/normal/"+image_id+".png")
