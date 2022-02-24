@@ -55,7 +55,7 @@ for file in os.listdir(directory):
     if npy_image is None:
         continue
     npy_image = crop_square(image=npy_image)
-    npy_image = downsample_square_image(image=npy_image, desired_size=128)
+    npy_image = downsample_square_image(image=npy_image, desired_size=256)
     image_id = file[:-6]
     if bool(set(annotations.loc[:, "lesion_type"]) & set(annotations.loc[image_id, "lesion_type"])):
         print("To abnormal: ", image_id)
