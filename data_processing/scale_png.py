@@ -33,6 +33,7 @@ for image_dir in dir_list:
         scale_factor = math.ceil(max_intensity / 256)
         # now apply the scale factor
         scaled_data = data // scale_factor
+        scaled_data = scaled_data.astype(np.uint8)
         im = Image.fromarray(scaled_data)
         im.save(image_dir)
         print("saved: ", image_dir)
