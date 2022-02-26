@@ -36,4 +36,5 @@ for image_dir in dir_list:
         scaled_data = data // scale_factor
         im = Image.fromarray(scaled_data)
         im.save(image_dir)
+        print("saved: ", image_dir)
 
