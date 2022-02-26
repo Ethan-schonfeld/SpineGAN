@@ -431,7 +431,7 @@ def convert_dataset(
         # Save the image as an uncompressed PNG.
         max_intensity = np.amax(img)
         scale_factor = math.ceil(max_intensity / 256)
-        scaled_img = data // scale_factor
+        scaled_img = img // scale_factor
         img = PIL.Image.fromarray(scaled_img, { 1: 'L', 3: 'RGB' }[channels])
         image_bits = io.BytesIO()
         img.save(image_bits, format='png', compress_level=0, optimize=False)
