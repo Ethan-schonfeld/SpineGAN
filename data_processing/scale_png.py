@@ -13,7 +13,7 @@ import math
 # In[ ]:
 
 
-directory = "/home/ethanschonfeld/cs236g/stylegan2-ada-pytorch-main/normal_dataset/00000"
+directory = "/home/ethanschonfeld/cs236g/SpineGAN/stylegan2-ada-pytorch-main/normal_dataset"
 
 
 # In[ ]:
