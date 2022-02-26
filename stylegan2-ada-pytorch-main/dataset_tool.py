@@ -398,10 +398,10 @@ def convert_dataset(
     for idx, image in tqdm(enumerate(input_iter), total=num_files):
         idx_str = f'{idx:08d}'
         archive_fname = f'{idx_str[:5]}/img{idx_str}.png'
-
+        print(np.amax(image))
         # Apply crop and resize.
         img = transform_image(image['img'])
-
+        print(np.amax(image))
         # Transform may drop images.
         if img is None:
             continue
