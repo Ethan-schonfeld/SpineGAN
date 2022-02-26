@@ -429,7 +429,7 @@ def convert_dataset(
             error(f'Image {archive_fname} attributes must be equal across all images of the dataset.  Got:\n' + '\n'.join(err))
 
         # Save the image as an uncompressed PNG.
-        max_intensity = np.amax(data)
+        max_intensity = np.amax(img)
         scale_factor = math.ceil(max_intensity / 256)
         scaled_img = data // scale_factor
         img = PIL.Image.fromarray(scaled_img, { 1: 'L', 3: 'RGB' }[channels])
