@@ -8,7 +8,7 @@ pip install click requests tqdm pyspng ninja imageio-ffmpeg==0.4.3
 
 To prepare data from DICOM format run image_main.py which will convert DICOM to png form and preprocess (crop, downsample) the image.
 
-Run the scale data script under dataset tools to preprocess images as detailed in the accompanying milestone report.
+Run scale_png.py script under dataset tools to preprocess images as detailed in the accompanying milestone report.
 
 Place the images you wish to train on in a folder in the same directory as the train.py script under {NAME}.
 
