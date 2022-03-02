@@ -121,7 +121,7 @@ def generate_images(
         img = img[0].cpu().numpy()
         print(img)
         print(np.shape(img))
-        img.dtype
+        print(img.dtype)
         break
         PIL.Image.fromarray(img[0].cpu().numpy()).save(f'{outdir}/seed{seed:04d}.png')
         #PIL.Image.fromarray(img[0].cpu().numpy(), 'RGB').save(f'{outdir}/seed{seed:04d}.png')
