@@ -6,7 +6,7 @@
 
 import os
 import pickle
-
+import torch
 
 # In[3]:
 
@@ -22,13 +22,8 @@ save_folder = "~/cs236g/generated_normal"
 
 # In[6]:
 
-
-try:
-    with open(checkpoint_path, 'rb') as f:
-        G = pickle.load(f)['G_ema']  # torch.nn.Module
-    print("Worked")
-except:
-    print("Failed")
+with open(checkpoint_path, 'rb') as f:
+    G = pickle.load(f)['G_ema']  # torch.nn.Module
 
 
 # In[ ]:
