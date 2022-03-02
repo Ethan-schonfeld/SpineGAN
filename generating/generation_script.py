@@ -11,7 +11,7 @@ import torch
 # In[3]:
 
 
-checkpoint_path = "~/cs236g/SpineGAN/stylegan2-ada-pytorch-main/training-ab-cond-ada/00002-abnormality_conditional_dataset-cond-auto1-kimg60-ada-target0.6-bgcfnc/network-snapshot-000060.pkl"
+checkpoint_path = "../stylegan2-ada-pytorch-main/training-ab-cond-ada/00002-abnormality_conditional_dataset-cond-auto1-kimg60-ada-target0.6-bgcfnc/network-snapshot-000060.pkl"
 
 
 # In[5]:
