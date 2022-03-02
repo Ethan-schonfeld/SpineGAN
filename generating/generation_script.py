@@ -24,7 +24,7 @@ save_folder = "~/cs236g/generated_normal"
 
 
 try:
-    with open(local_checkpoint_path, 'rb') as f:
+    with open(checkpoint_path, 'rb') as f:
         G = pickle.load(f)['G_ema']  # torch.nn.Module
     print("Worked")
 except:
