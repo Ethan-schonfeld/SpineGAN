@@ -224,7 +224,7 @@ class ImageFolderDataset(Dataset):
         if fname not in self._all_fnames:
             return None
         with self._open_file(fname) as f:
-            labels = json.load(f)['labels']
+            labels = json.load(f)
         if labels is None:
             return None
         labels = dict(labels)
