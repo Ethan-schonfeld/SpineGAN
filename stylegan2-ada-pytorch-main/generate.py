@@ -120,6 +120,8 @@ def generate_images(
         img = (img.permute(0, 2, 3, 1) * 127.5 + 128).clamp(0, 255).to(torch.uint8)
         img = img[0].cpu().numpy()
         print(img)
+        print(np.shape(img))
+        img.dtype
         break
         PIL.Image.fromarray(img[0].cpu().numpy()).save(f'{outdir}/seed{seed:04d}.png')
         #PIL.Image.fromarray(img[0].cpu().numpy(), 'RGB').save(f'{outdir}/seed{seed:04d}.png')
