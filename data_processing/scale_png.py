@@ -13,7 +13,7 @@ import math
 # In[ ]:
 
 
-directory = "/home/ethanschonfeld/cs236g/SpineGAN/stylegan2-ada-pytorch-main/normal_dataset"
+directory = "/home/ethanschonfeld/cs236g/SpineGAN/stylegan2-ada-pytorch-main/abnormality_conditional_dataset"
 
 
 # In[ ]:
