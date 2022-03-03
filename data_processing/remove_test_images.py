@@ -37,6 +37,6 @@ for image_file in image_list:
     if image_id in all_test_ids:
         os.remove(image_file)
         print("Removed: ", image_id)
-    if count % 500:
+    if count % 500 == 0:
         print("Number of iterations passed: ", count)
 
