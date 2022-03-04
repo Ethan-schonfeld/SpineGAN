@@ -190,7 +190,7 @@ for i in range(0, 10000): # they used 10000
         model.train()
         optimizer.zero_grad()
         
-        if batch_num % 1 == 0:
+        if batch_num % 5 == 0:
             print("Epoch: ", i, " Batch: ", batch_num)
         batch = train_images[batch_num*batch_size:(batch_num+1)*batch_size, :, :, :]
         batch_labels = train_labels[batch_num*batch_size:(batch_num+1)*batch_size]
@@ -205,7 +205,7 @@ for i in range(0, 10000): # they used 10000
             train_X.to('cuda')
             
         outputs = model(train_X.to('cuda'))
-        loss = criterion(outputs, batch_labels.unsqueeze(1))
+        loss = criterion(outputs.to('cuda'), batch_labels.unsqueeze(1).to('cuda'))
         loss.backward()
         optimizer.step()
 
