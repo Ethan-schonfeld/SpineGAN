@@ -114,21 +114,17 @@ class StyleGAN2Loss(Loss):
                 
                 # Add domain loss term to traditional loss
                 
-                loss_Gmain = torch.nn.functional.softplus(-gen_logits).mean() # -log(sigmoid(gen_logits))
-                print("loss_Gmain: ", loss_Gmain)
-                print("scaled_loss_domain: ", scaled_loss_domain)
-                
+                loss_Gmain = torch.nn.functional.softplus(-gen_logits).mean() # -log(sigmoid(gen_logits))      
                 loss_Gfinal = torch.add(loss_Gmain, scaled_loss_domain)
                 print("loss_Gfinal: ", loss_Gfinal)
                 
-                exit(0)
-
-                training_stats.report('Loss/G/loss', loss_Gmain)
+                training_stats.report('Loss/G/loss', loss_Gfinal)
             with torch.autograd.profiler.record_function('Gmain_backward'):
-                loss_Gmain.mul(gain).backward()
+                loss_Gfinal.mul(gain).backward()
 
         # Gpl: Apply path length regularization.
         if do_Gpl:
+            print("In use")
             with torch.autograd.profiler.record_function('Gpl_forward'):
                 batch_size = gen_z.shape[0] // self.pl_batch_shrink
                 gen_img, gen_ws = self.run_G(gen_z[:batch_size], gen_c[:batch_size], sync=sync)
