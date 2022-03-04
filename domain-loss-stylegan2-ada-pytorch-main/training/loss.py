@@ -103,7 +103,10 @@ class StyleGAN2Loss(Loss):
                 training_stats.report('Loss/scores/fake', gen_logits)
                 training_stats.report('Loss/signs/fake', gen_logits.sign())
                 loss_Gmain = torch.nn.functional.softplus(-gen_logits) # -log(sigmoid(gen_logits))
+                loss_domain_function = torch.nn.BCELoss()
+                loss_domain = loss_domain_function(classifier_result, gen_closs.unsqueeze(1))
                 print("loss_Gmain: ", loss_Gmain)
+                print("loss_domain: ", loss_domain)
                 exit(0)
                 training_stats.report('Loss/G/loss', loss_Gmain)
             with torch.autograd.profiler.record_function('Gmain_backward'):
