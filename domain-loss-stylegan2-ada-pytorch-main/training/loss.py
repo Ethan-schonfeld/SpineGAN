@@ -100,14 +100,11 @@ class StyleGAN2Loss(Loss):
             
                 classifier_result = SpineClassifier(gen_image_processed)
                 
-                print(gen_class.shape)
-                
-                print(classifier_result.size())
-                exit(0)
-                
                 training_stats.report('Loss/scores/fake', gen_logits)
                 training_stats.report('Loss/signs/fake', gen_logits.sign())
                 loss_Gmain = torch.nn.functional.softplus(-gen_logits) # -log(sigmoid(gen_logits))
+                print("loss_Gmain: ", loss_Gmain)
+                exit(0)
                 training_stats.report('Loss/G/loss', loss_Gmain)
             with torch.autograd.profiler.record_function('Gmain_backward'):
                 loss_Gmain.mean().mul(gain).backward()
