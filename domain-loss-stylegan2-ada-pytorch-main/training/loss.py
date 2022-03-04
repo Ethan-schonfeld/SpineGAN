@@ -8,6 +8,7 @@
 
 import numpy as np
 import torch
+from sys import exit
 from torch_utils import training_stats
 from torch_utils import misc
 from torch_utils.ops import conv2d_gradfix
@@ -66,6 +67,11 @@ class StyleGAN2Loss(Loss):
             with torch.autograd.profiler.record_function('Gmain_forward'):
                 gen_img, _gen_ws = self.run_G(gen_z, gen_c, sync=(sync and not do_Gpl)) # May get synced by Gpl.
                 gen_logits = self.run_D(gen_img, gen_c, sync=False)
+                
+                # Here we add an additional loss term, using SpineClassifier, a classifier for normal versus abnormal images.
+                print(gen_img.size())
+                exit(0)
+                
                 training_stats.report('Loss/scores/fake', gen_logits)
                 training_stats.report('Loss/signs/fake', gen_logits.sign())
                 loss_Gmain = torch.nn.functional.softplus(-gen_logits) # -log(sigmoid(gen_logits))
