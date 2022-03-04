@@ -214,7 +214,7 @@ for i in range(0, 10000): # they used 10000
         train_auc = roc_auc_score(batch_labels.cpu().detach().numpy(), outputs.cpu().detach().numpy())
         epoch_auc_estimation.append(train_auc)
         
-    print("Epoch ", i, " AUC estimation: ", sum(epoch_auc_estimation)/len(epoch_auc_estimation))
+    print("Epoch ", i, " Train AUC estimation: ", sum(epoch_auc_estimation)/len(epoch_auc_estimation))
                 
     print("Epoch ", i, " loss: ", epoch_loss)
     # get random sample of 300 of test images
@@ -241,5 +241,5 @@ for i in range(0, 10000): # they used 10000
     print("Epoch ", i, " Test Sample AUC: ", test_auc)
     if test_auc > best_test_auc_estimate:
         best_test_auc_estimate = test_auc
-        torch.save(model.state_dict(), checkpoint_path+"checkpoint_"+i+".pt")
+        torch.save(model.state_dict(), checkpoint_path+"checkpoint_"+str(i)+".pt")
 
