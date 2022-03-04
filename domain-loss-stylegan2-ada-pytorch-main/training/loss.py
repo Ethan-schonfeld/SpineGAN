@@ -22,7 +22,7 @@ class Loss:
 #----------------------------------------------------------------------------
 
 #----------------------------------------------------------------------------
-PATH = "/home/ethanschonfeld/cs236g/SpineGAN/abnormality_classification/checkpoint_10.pt"
+PATH = "/home/ethanschonfeld/cs236g/SpineGAN/abnormality_classification/checkpoint_aug_19.pt"
 
 # Load SpineClassifier
 
