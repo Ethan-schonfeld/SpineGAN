@@ -204,7 +204,7 @@ for i in range(0, 10000): # they used 10000
         if torch.cuda.is_available():
             train_X.to('cuda')
             
-        outputs = model(train_X)
+        outputs = model(train_X.to('cuda'))
         loss = criterion(outputs, batch_labels.unsqueeze(1))
         loss.backward()
         optimizer.step()
@@ -236,7 +236,7 @@ for i in range(0, 10000): # they used 10000
     
     model.eval()
     with torch.no_grad():
-        test_outputs = model(test_X)
+        test_outputs = model(test_X.to('cuda'))
         test_auc = roc_auc_score(test_batch_labels.detach().numpy(), test_outputs.detach().numpy())
     print("Epoch ", i, " Test Sample AUC: ", test_auc)
     if test_auc > best_test_auc_estimate:
