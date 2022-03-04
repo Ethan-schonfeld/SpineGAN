@@ -12,6 +12,7 @@ from sys import exit
 from torch_utils import training_stats
 from torch_utils import misc
 from torch_utils.ops import conv2d_gradfix
+import torchvision.transforms.Normalize as Normalize
 
 #----------------------------------------------------------------------------
 
@@ -93,18 +94,12 @@ class StyleGAN2Loss(Loss):
                 # copy the image of one channel to three of the same channels
         
                 expanded_gen_img = torch.cat([cropped_gen_img, cropped_gen_img, cropped_gen_img], dim=1)
+                
+                # Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225])
             
-                print(expanded_gen_img.size())
-                print("Checking if dimensions are the same:")
-                if torch.equal(expanded_gen_img[:, 0, :, :], expanded_gen_img[:, 1, :, :]) and torch.equal(expanded_gen_img[:, 0, :, :], expanded_gen_img[:, 2, :, :]):
-                    print("Yes!")
-                else:
-                    print("No!")
+                gen_image_processed = expanded_gen_img.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225])
+                print(gen_image_processed.size())
                 exit(0)
-                
-                # Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225]
-            
-                
             
                 classifier_result = SpineClassifier(gen_image_processed)
                 print(gen_class.shape)
