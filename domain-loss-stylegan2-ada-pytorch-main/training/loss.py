@@ -84,6 +84,13 @@ class StyleGAN2Loss(Loss):
                 # Here we add an additional loss term, using SpineClassifier, a classifier for normal versus abnormal images.
                 gen_class = gen_c.cpu().detach().numpy()
                 gen_class = gen_class[:,1]
+                # Now we need to preprocess the gen_img in order to input it into SpineClassifier which is a densenet. The required transforms can be found 
+                # in pytorch documentation to include a center crop to 224, and Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225]
+                print(gen_img.size())
+                exit(0)
+                #cropped_gen_img = gen_img[:, ]
+                
+                classifier_result = SpineClassifier(gen_image_processed)
                 print(gen_class.shape)
                 print(gen_class)
                 exit(0)
