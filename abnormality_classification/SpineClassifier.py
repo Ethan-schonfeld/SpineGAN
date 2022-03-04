@@ -16,6 +16,7 @@ from PIL import Image
 from sklearn.metrics import roc_auc_score
 from sklearn.utils import class_weight
 import os
+import sys
 import random
 import json
 import matplotlib.pyplot as plt
@@ -52,6 +53,9 @@ preprocess = transforms.Compose([
     transforms.ToTensor(),
     transforms.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225]),
 ])
+
+policies = [T.AutoAugmentPolicy.CIFAR10, T.AutoAugmentPolicy.IMAGENET, T.AutoAugmentPolicy.SVHN]
+augmenters = [T.AutoAugment(policy) for policy in policies]
 
 
 # In[ ]:
@@ -203,6 +207,10 @@ for i in range(0, 10000): # they used 10000
             train_X = torch.cat([train_X, tensor], dim=0)
         if torch.cuda.is_available():
             train_X.to('cuda')
+            
+        random_num = random.uniform(0,1)
+        print(random_num)
+        exit(0)
             
         outputs = model(train_X.to('cuda'))
         loss = criterion(outputs.to('cuda'), batch_labels.unsqueeze(1).to('cuda'))
