@@ -21,6 +21,19 @@ class Loss:
 
 #----------------------------------------------------------------------------
 
+#----------------------------------------------------------------------------
+PATH = "/home/ethanschonfeld/cs236g/SpineGAN/abnormality_classification/checkpoint_6.pt"
+
+# Load SpineClassifier
+
+SpineClassifier = torch.load(PATH)
+# get number of parameters
+model_parameters = filter(lambda p: p.requires_grad, SpineClassifier.parameters())
+params = sum([np.prod(p.size()) for p in model_parameters])
+print("Successfully loaded SpineClassifier with parameter count: ", params)
+
+#----------------------------------------------------------------------------
+
 class StyleGAN2Loss(Loss):
     def __init__(self, device, G_mapping, G_synthesis, D, augment_pipe=None, style_mixing_prob=0.9, r1_gamma=10, pl_batch_shrink=2, pl_decay=0.01, pl_weight=2):
         super().__init__()
