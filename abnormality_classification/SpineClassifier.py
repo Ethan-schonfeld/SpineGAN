@@ -50,12 +50,12 @@ test_image_directory = "/home/ethanschonfeld/cs236g/test_dataset/"
 preprocess = transforms.Compose([
     transforms.Resize(224),
     transforms.ToTensor(),
-    transforms.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225]),
+    transforms.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225])
 ])
 
 transform_augment = transforms.Compose([
-    transforms.RandomHorizontalFlip(p=0.3)
-    transforms.RandomRotation(degrees=(-5, 5))
+    transforms.RandomHorizontalFlip(p=0.3),
+    transforms.RandomRotation(degrees=(-5, 5)),
     transforms.RandomResizedCrop(size=(224,224), scale=(0.8, 1.0), ratio=(1, 1))
 ])
 
