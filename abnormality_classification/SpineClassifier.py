@@ -30,15 +30,15 @@ checkpoint_path = "/home/ethanschonfeld/cs236g/SpineGAN/abnormality_classificati
 # In[ ]:
 
 
-train_abnormality_directory = "/home/ethanschonfeld/cs236/SpineGAN/stylegan2-ada-pytorch-main/abnormality_conditional_dataset/dataset.json"
-train_image_directory = "/home/ethanschonfeld/cs236/SpineGAN/stylegan2-ada-pytorch-main/abnormality_conditional_dataset/"
+train_abnormality_directory = "/home/ethanschonfeld/cs236g/SpineGAN/stylegan2-ada-pytorch-main/abnormality_conditional_dataset/dataset.json"
+train_image_directory = "/home/ethanschonfeld/cs236g/SpineGAN/stylegan2-ada-pytorch-main/abnormality_conditional_dataset/"
 
 
 # In[ ]:
 
 
-test_abnormality_directory = "/home/ethanschonfeld/cs236/vindr/annotations/test.csv/"
-test_image_directory = "/home/ethanschonfeld/cs236/test_dataset/"
+test_abnormality_directory = "/home/ethanschonfeld/cs236g/vindr/annotations/test.csv/"
+test_image_directory = "/home/ethanschonfeld/cs236g/test_dataset/"
 
 
 # In[ ]:
