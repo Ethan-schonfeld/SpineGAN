@@ -85,12 +85,21 @@ class StyleGAN2Loss(Loss):
                 gen_class = gen_c.cpu().detach().numpy()
                 gen_class = gen_class[:,1]
                 # Now we need to preprocess the gen_img in order to input it into SpineClassifier which is a densenet. The required transforms can be found 
-                # in pytorch documentation to include a center crop to 224, and Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225]
+                
+                # center crop to 224x224
    
                 cropped_gen_img = gen_img[:, :, 16:240, 16:240]
-                print(cropped_gen_img.size())
+    
+                # copy the image of one channel to three of the same channels
+        
+                expanded_gen_img = cropped_gen_img.repeat(cropped_gen_img.size()[0], 3, 224, 224)
+                print(expanded_gen_img.size())
                 exit(0)
                 
+                # Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225]
+            
+                
+            
                 classifier_result = SpineClassifier(gen_image_processed)
                 print(gen_class.shape)
                 print(gen_class)
