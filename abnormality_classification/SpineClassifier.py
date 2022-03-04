@@ -37,7 +37,7 @@ train_image_directory = "/home/ethanschonfeld/cs236g/SpineGAN/stylegan2-ada-pyto
 # In[ ]:
 
 
-test_abnormality_directory = "/home/ethanschonfeld/cs236g/vindr/annotations/test.csv/"
+test_abnormality_directory = "/home/ethanschonfeld/cs236g/vindr/annotations/test.csv"
 test_image_directory = "/home/ethanschonfeld/cs236g/test_dataset/"
 
 
