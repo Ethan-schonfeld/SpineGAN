@@ -102,15 +102,26 @@ class StyleGAN2Loss(Loss):
                 
                 training_stats.report('Loss/scores/fake', gen_logits)
                 training_stats.report('Loss/signs/fake', gen_logits.sign())
-                loss_Gmain = torch.nn.functional.softplus(-gen_logits) # -log(sigmoid(gen_logits))
+                
+                # Calculate domain loss term
+                
                 loss_domain_function = torch.nn.BCELoss()
                 loss_domain = loss_domain_function(classifier_result, torch.from_numpy(gen_class).unsqueeze(1).to('cuda'))
+                
+                    # Here we use a hyperparameter of 0.01 to scale this domain SpineClassifier loss term determined empirically
+                
+                scaled_loss_domain = torch.mul(loss_domain, 0.01)
+                
+                # Add domain loss term to traditional loss
+                
+                loss_Gmain = torch.nn.functional.softplus(-gen_logits).mean() # -log(sigmoid(gen_logits))
                 print("loss_Gmain: ", loss_Gmain)
-                print("loss_domain: ", loss_domain)
+                print("scaled_loss_domain: ", scaled_loss_domain)
                 exit(0)
+
                 training_stats.report('Loss/G/loss', loss_Gmain)
             with torch.autograd.profiler.record_function('Gmain_backward'):
-                loss_Gmain.mean().mul(gain).backward()
+                loss_Gmain.mul(gain).backward()
 
         # Gpl: Apply path length regularization.
         if do_Gpl:
