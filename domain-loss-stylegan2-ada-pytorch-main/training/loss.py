@@ -104,7 +104,7 @@ class StyleGAN2Loss(Loss):
                 training_stats.report('Loss/signs/fake', gen_logits.sign())
                 loss_Gmain = torch.nn.functional.softplus(-gen_logits) # -log(sigmoid(gen_logits))
                 loss_domain_function = torch.nn.BCELoss()
-                loss_domain = loss_domain_function(classifier_result, gen_class.unsqueeze(1))
+                loss_domain = loss_domain_function(classifier_result, torch.from_numpy(gen_class).unsqueeze(1).to('cuda'))
                 print("loss_Gmain: ", loss_Gmain)
                 print("loss_domain: ", loss_domain)
                 exit(0)
