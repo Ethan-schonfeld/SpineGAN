@@ -9,7 +9,6 @@ import torch
 import torch.nn as nn
 from torchvision import transforms
 import torchvision.models as models
-import torchvision.transforms as T
 import torch.optim as optim
 import numpy as np
 import pandas as pd
@@ -49,15 +48,16 @@ test_image_directory = "/home/ethanschonfeld/cs236g/test_dataset/"
 # these are the required transforms for Pytorch densenet model.
 # we will apply these to all training and testing images
 preprocess = transforms.Compose([
-    transforms.Resize(256),
-    transforms.CenterCrop(224),
+    transforms.Resize(224),
     transforms.ToTensor(),
     transforms.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225]),
 ])
 
-policies = [T.AutoAugmentPolicy.CIFAR10, T.AutoAugmentPolicy.IMAGENET, T.AutoAugmentPolicy.SVHN]
-augmenters = [T.AutoAugment(policy) for policy in policies]
-
+transform_augment = transforms.Compose([
+    transforms.RandomHorizontalFlip(p=0.3)
+    transforms.RandomRotation(degrees=(-5, 5))
+    transforms.RandomResizedCrop(size=(224,224), scale=(0.8, 1.0), ratio=(1, 1))
+])
 
 # In[ ]:
 
@@ -209,8 +209,9 @@ for i in range(0, 10000): # they used 10000
         if torch.cuda.is_available():
             train_X.to('cuda')
             
-        random_num = random.uniform(0,1)
-        print(random_num)
+        print("Size before augment: ", train_X.size())    
+        train_X = transform_augment(train_X).to('cuda')
+        print("Size after augment: ", train_X.size())
         exit(0)
             
         outputs = model(train_X.to('cuda'))
