@@ -209,10 +209,8 @@ for i in range(0, 10000): # they used 10000
         if torch.cuda.is_available():
             train_X.to('cuda')
             
-        print("Size before augment: ", train_X.size())    
+        # augment the images according to the augmentation defined above
         train_X = transform_augment(train_X).to('cuda')
-        print("Size after augment: ", train_X.size())
-        exit(0)
             
         outputs = model(train_X.to('cuda'))
         loss = criterion(outputs.to('cuda'), batch_labels.unsqueeze(1).to('cuda'))
