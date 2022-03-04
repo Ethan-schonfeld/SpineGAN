@@ -92,7 +92,7 @@ class StyleGAN2Loss(Loss):
     
                 # copy the image of one channel to three of the same channels
         
-                expanded_gen_img = cropped_gen_img.repeat(16, 3, 224, 224)
+                expanded_gen_img = torch.cat([cropped_gen_img, cropped_gen_img, cropped_gen_img], dim=1)
             
                 print(expanded_gen_img.size())
                 print("Checking if dimensions are the same:")
