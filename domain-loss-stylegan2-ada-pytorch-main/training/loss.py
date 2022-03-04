@@ -12,8 +12,7 @@ from sys import exit
 from torch_utils import training_stats
 from torch_utils import misc
 from torch_utils.ops import conv2d_gradfix
-import torchvision.transforms.Normalize as Normalize
-
+from torchvision import transforms
 #----------------------------------------------------------------------------
 
 class Loss:
@@ -97,7 +96,7 @@ class StyleGAN2Loss(Loss):
                 
                 # Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225])
             
-                gen_image_processed = expanded_gen_img.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225])
+                gen_image_processed = transforms.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225])(expanded_gen_img)
                 print(gen_image_processed.size())
                 exit(0)
             
