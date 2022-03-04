@@ -69,9 +69,10 @@ class StyleGAN2Loss(Loss):
                 gen_logits = self.run_D(gen_img, gen_c, sync=False)
                 
                 # Here we add an additional loss term, using SpineClassifier, a classifier for normal versus abnormal images.
-                print(gen_img.size())
-                print(gen_c.size())
-                print(gen_c)
+                gen_class = gen_c.cpu().detach().numpy()
+                gen_class = gen_class[:,1]
+                print(gen_class.shape)
+                print(gen_class)
                 exit(0)
                 
                 training_stats.report('Loss/scores/fake', gen_logits)
