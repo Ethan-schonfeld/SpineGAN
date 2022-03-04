@@ -211,7 +211,7 @@ for i in range(0, 10000): # they used 10000
 
         epoch_loss += loss.item()
         
-        train_auc = roc_auc_score(batch_labels.detach().numpy(), outputs.detach().numpy())
+        train_auc = roc_auc_score(batch_labels.cpu().detach().numpy(), outputs.cpu().detach().numpy())
         epoch_auc_estimation.append(train_auc)
         
     print("Epoch ", i, " AUC estimation: ", sum(epoch_auc_estimation)/len(epoch_auc_estimation))
@@ -237,7 +237,7 @@ for i in range(0, 10000): # they used 10000
     model.eval()
     with torch.no_grad():
         test_outputs = model(test_X.to('cuda'))
-        test_auc = roc_auc_score(test_batch_labels.detach().numpy(), test_outputs.detach().numpy())
+        test_auc = roc_auc_score(test_batch_labels.cpu().detach().numpy(), test_outputs.cpu().detach().numpy())
     print("Epoch ", i, " Test Sample AUC: ", test_auc)
     if test_auc > best_test_auc_estimate:
         best_test_auc_estimate = test_auc
