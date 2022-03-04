@@ -96,7 +96,7 @@ class StyleGAN2Loss(Loss):
             
                 print(expanded_gen_img.size())
                 print("Checking if dimensions are the same:")
-                if expanded_gen_img[:, 0, :, :] == expanded_gen_img[:, 1, :, :] and expanded_gen_img[:, 0, :, :] == expanded_gen_img[:, 2, :, :]:
+                if torch.eq(expanded_gen_img[:, 0, :, :], expanded_gen_img[:, 1, :, :]) and torch.eq(expanded_gen_img[:, 0, :, :], expanded_gen_img[:, 2, :, :]):
                     print("Yes!")
                 else:
                     print("No!")
