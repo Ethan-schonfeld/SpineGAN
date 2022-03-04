@@ -97,12 +97,12 @@ class StyleGAN2Loss(Loss):
                 # Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225])
             
                 gen_image_processed = transforms.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225])(expanded_gen_img)
-                print(gen_image_processed.size())
-                exit(0)
             
                 classifier_result = SpineClassifier(gen_image_processed)
+                
                 print(gen_class.shape)
-                print(gen_class)
+                
+                print(classifier_result.size())
                 exit(0)
                 
                 training_stats.report('Loss/scores/fake', gen_logits)
