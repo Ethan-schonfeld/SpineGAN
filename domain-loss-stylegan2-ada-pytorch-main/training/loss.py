@@ -116,7 +116,6 @@ class StyleGAN2Loss(Loss):
                 
                 loss_Gmain = torch.nn.functional.softplus(-gen_logits).mean() # -log(sigmoid(gen_logits))      
                 loss_Gfinal = torch.add(loss_Gmain, scaled_loss_domain)
-                print("loss_Gfinal: ", loss_Gfinal)
                 
                 training_stats.report('Loss/G/loss', loss_Gfinal)
             with torch.autograd.profiler.record_function('Gmain_backward'):
