@@ -92,8 +92,14 @@ class StyleGAN2Loss(Loss):
     
                 # copy the image of one channel to three of the same channels
         
-                expanded_gen_img = cropped_gen_img.repeat(cropped_gen_img.size()[0], 3, 224, 224)
+                expanded_gen_img = cropped_gen_img.repeat(16, 3, 224, 224)
+            
                 print(expanded_gen_img.size())
+                print("Checking if dimensions are the same:")
+                if expanded_gen_img[:, 0, :, :] == expanded_gen_img[:, 1, :, :] and expanded_gen_img[:, 0, :, :] == expanded_gen_img[:, 2, :, :]:
+                    print("Yes!")
+                else:
+                    print("No!")
                 exit(0)
                 
                 # Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225]
