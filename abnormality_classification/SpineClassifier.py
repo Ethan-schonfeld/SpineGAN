@@ -217,11 +217,11 @@ for i in range(0, 10000): # they used 10000
     print("Epoch ", i, " Train AUC estimation: ", sum(epoch_auc_estimation)/len(epoch_auc_estimation))
                 
     print("Epoch ", i, " loss: ", epoch_loss)
-    # get random sample of 300 of test images
+    # get random sample of 600 of test images
     total_num_test = int(test_images.shape[0])
-    # sample 300 without replacement
+    # sample 600 without replacement
     total_num_test = range(total_num_test)
-    random_sample = random.sample(total_num_test, 300)
+    random_sample = random.sample(total_num_test, 600)
     test_batch = test_images[random_sample, :, :, :]
     test_batch_labels = [test_labels[i] for i in random_sample]
     test_batch_labels = torch.Tensor(test_batch_labels)
