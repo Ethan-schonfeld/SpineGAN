@@ -24,7 +24,7 @@ import matplotlib.pyplot as plt
 # In[ ]:
 
 
-checkpoint_path = "/home/ethanschonfeld/cs236g/SpineClassifier/"
+checkpoint_path = "/home/ethanschonfeld/cs236g/SpineGAN/abnormality_classification/"
 
 
 # In[ ]:
