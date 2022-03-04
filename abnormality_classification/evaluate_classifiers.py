@@ -94,17 +94,17 @@ test_labels = torch.Tensor(test_labels)
 
 # In[ ]:
 
-
+print("Loading test data into Torch")
 test_X = torch.empty(0, 3, 224, 224)
 for image_number in range(test_images.shape[0]):
     tensor = preprocess(Image.fromarray(test_images[image_number, :, :, :]))
     tensor = tensor.unsqueeze(0)
     test_X = torch.cat([test_X, tensor], dim=0)
-
+print("Successfully Loaded")
 
 # In[ ]:
 
-
+print("Begin Evaluating Model Checkpoints")
 os_list = list(os.listdir(checkpoint_path))
 os.chdir(checkpoint_path)
 for file_name in os_list:
