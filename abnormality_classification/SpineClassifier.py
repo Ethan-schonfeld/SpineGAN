@@ -56,7 +56,7 @@ preprocess = transforms.Compose([
 transform_augment = transforms.Compose([
     transforms.RandomHorizontalFlip(p=0.3),
     transforms.RandomRotation(degrees=(-5, 5)),
-    transforms.RandomResizedCrop(size=(224,224), scale=(0.8, 1.0), ratio=(1, 1))
+    transforms.RandomResizedCrop(size=(224,224), scale=(0.8, 1.0), ratio=(1., 1.))
 ])
 
 # In[ ]:
