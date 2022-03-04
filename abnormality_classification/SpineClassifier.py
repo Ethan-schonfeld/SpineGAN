@@ -9,6 +9,7 @@ import torch
 import torch.nn as nn
 from torchvision import transforms
 import torchvision.models as models
+import torchvision.transforms as T
 import torch.optim as optim
 import numpy as np
 import pandas as pd
