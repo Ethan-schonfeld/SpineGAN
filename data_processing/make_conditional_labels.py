@@ -32,17 +32,17 @@ for picture_name in image_names:
             labels[picture_name] = 0
         elif condition == "Disc space narrowing":
             labels[picture_name] = 1
-        elif condition == "Foraminal stenosis”:
+        elif condition == "Foraminal stenosis":
             labels[picture_name] = 2
-        elif condition == "Osteophytes”:
+        elif condition == "Osteophytes":
             labels[picture_name] = 3
-        elif condition == "Spondylolysthesis”:
+        elif condition == "Spondylolysthesis":
             labels[picture_name] = 4
-        elif condition == "Surgical implant”:
+        elif condition == "Surgical implant":
             labels[picture_name] = 5
-        elif condition == "Vertebral collapse”:
+        elif condition == "Vertebral collapse":
             labels[picture_name] = 6
-        elif condition == "Other lesions”:
+        elif condition == "Other lesions":
             labels[picture_name] = 7
         else:
             os.remove(picture_name)
