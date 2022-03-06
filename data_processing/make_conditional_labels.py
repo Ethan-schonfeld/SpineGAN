@@ -20,6 +20,10 @@ import pandas as pd
 annotations = pd.read_csv(label_directory)
 annotations.index = annotations.loc[:, "image_id"]
 
+# the checking of type of condition below is to only include images that have one abnormality type, (including those with multiple of the same abnormality)
+# but to exclude images that have multiple different abnormality types
+# in order to build a conditional generator of abnormality type
+
 labels = {}
 image_names = list(os.listdir(image_directory))
 os.chdir(image_directory)
