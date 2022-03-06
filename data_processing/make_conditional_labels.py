@@ -25,12 +25,11 @@ image_names = list(os.listdir(image_directory))
 for picture_name in image_names:
     print(picture_name[-4:])
     image_id = picture_name[:-4]
-    print(picture_name)
-    print(image_id)
-    exit(0)
     if picture_name[-4:] == ".png":
-        pass
-    exit(0)
+        condition = annotations.loc[image_id, "lesion_type"]
+        print(image_id)
+        print(condition)
+        exit(0)
     labels[picture_name] = 0
 
 # In[ ]:
