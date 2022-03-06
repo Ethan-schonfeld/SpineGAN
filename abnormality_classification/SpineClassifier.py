@@ -141,6 +141,11 @@ for filename in train_gen_abnormal_file_list:
     
 print("Made abnormal images")
     
+print("Shuffling training data and labels")
+c = list(zip(train_images, train_labels))
+random.shuffle(c)
+train_images, train_labels = zip(*c)
+
 train_images = np.asarray(train_images)
 print("Finalized training images")
 
