@@ -19,7 +19,7 @@ import sys
 
 labels = {}
 image_names = list(os.listdir(image_directory))
-for picture_name in normal_names:
+for picture_name in image_names:
     print(picture_name[-4:])
     exit(0)
     labels[picture_name] = 0
