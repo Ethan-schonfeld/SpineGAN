@@ -34,6 +34,9 @@ checkpoint_path = "/home/ethanschonfeld/cs236g/SpineGAN/abnormality_classificati
 train_abnormality_directory = "/home/ethanschonfeld/cs236g/SpineGAN/stylegan2-ada-pytorch-main/abnormality_conditional_dataset/dataset.json"
 train_image_directory = "/home/ethanschonfeld/cs236g/SpineGAN/stylegan2-ada-pytorch-main/abnormality_conditional_dataset/"
 
+train_gen_normal_directory = "/home/ethanschonfeld/cs236g/SpineGAN/generated/normal/"
+train_gen_abnormal_directory = "/home/ethanschonfeld/cs236g/SpineGAN/generated/abnormal/"
+
 
 # In[ ]:
 
@@ -55,11 +58,11 @@ preprocess = transforms.Compose([
 
 # comment this if you don't want augmentation
 
-#transform_augment = transforms.Compose([
-#    transforms.RandomHorizontalFlip(p=0.3),
-#    transforms.RandomRotation(degrees=(-5, 5)),
-#    transforms.RandomResizedCrop(size=(224,224), scale=(0.8, 1.0), ratio=(1., 1.))
-#])
+transform_augment = transforms.Compose([
+    transforms.RandomHorizontalFlip(p=0.3),
+    transforms.RandomRotation(degrees=(-5, 5)),
+    transforms.RandomResizedCrop(size=(224,224), scale=(0.8, 1.0), ratio=(1., 1.))
+])
 
 # In[ ]:
 
@@ -108,7 +111,36 @@ for filename in train_image_file_list:
         train_images.append(three_channel_data)
     except:
         print(filename)
+
+# load in train gen image data and make labels
+train_gen_normal_file_list = list(os.listdir(train_gen_normal_directory))
+os.chdir(train_gen_normal_directory)
+for filename in train_gen_normal_file_list:
+    extension = filename[-4:]
+    if extension != ".png":
+        continue
+    train_labels.append(0)
+    image = Image.open(filename)
+    data = np.asarray(image)
+    print(data.shape)
+    exit(0)
+    three_channel_data = np.repeat(data[:, :, np.newaxis], 3, axis=2)
+    train_images.append(three_channel_data)
+    
+train_gen_abnormal_file_list = list(os.listdir(train_gen_abnormal_directory))
+os.chdir(train_gen_abnormal_directory)
+for filename in train_gen_abnormal_file_list:
+    extension = filename[-4:]
+    if extension != ".png":
+        continue
+    train_labels.append(1)
+    image = Image.open(filename)
+    data = np.asarray(image)
+    three_channel_data = np.repeat(data[:, :, np.newaxis], 3, axis=2)
+    train_images.append(three_channel_data)
+    
 train_images = np.asarray(train_images)
+
 
 
 # In[ ]:
