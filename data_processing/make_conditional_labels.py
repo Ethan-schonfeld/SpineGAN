@@ -24,6 +24,7 @@ labels = {}
 image_names = list(os.listdir(image_directory))
 os.chdir(image_directory)
 duplicates = []
+count = 0
 for picture_name in image_names:
     image_id = picture_name[:-4]
     if picture_name[-4:] == ".png":
@@ -48,10 +49,12 @@ for picture_name in image_names:
             else:
                 #os.remove(picture_name)
                 pass
+            count += 1
         except:
             duplicates.append(image_id)
 duplicates = list(set(duplicates))
-print(duplicates)
+print(len(duplicates))
+print(count)
 exit(0)
 
 # In[ ]:
