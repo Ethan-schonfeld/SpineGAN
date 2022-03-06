@@ -53,11 +53,13 @@ preprocess = transforms.Compose([
     transforms.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225])
 ])
 
-transform_augment = transforms.Compose([
-    transforms.RandomHorizontalFlip(p=0.3),
-    transforms.RandomRotation(degrees=(-5, 5)),
-    transforms.RandomResizedCrop(size=(224,224), scale=(0.8, 1.0), ratio=(1., 1.))
-])
+# comment this if you don't want augmentation
+
+#transform_augment = transforms.Compose([
+#    transforms.RandomHorizontalFlip(p=0.3),
+#    transforms.RandomRotation(degrees=(-5, 5)),
+#    transforms.RandomResizedCrop(size=(224,224), scale=(0.8, 1.0), ratio=(1., 1.))
+#])
 
 # In[ ]:
 
@@ -210,7 +212,7 @@ for i in range(0, 10000): # they used 10000
             train_X.to('cuda')
             
         # augment the images according to the augmentation defined above
-        train_X = transform_augment(train_X).to('cuda')
+        #train_X = transform_augment(train_X).to('cuda')
             
         outputs = model(train_X.to('cuda'))
         loss = criterion(outputs.to('cuda'), batch_labels.unsqueeze(1).to('cuda'))
@@ -247,7 +249,7 @@ for i in range(0, 10000): # they used 10000
         test_outputs = model(test_X.to('cuda'))
         test_auc = roc_auc_score(test_batch_labels.cpu().detach().numpy(), test_outputs.cpu().detach().numpy())
     print("Epoch ", i, " Test Sample AUC: ", test_auc)
-    torch.save(model, checkpoint_path+"checkpoint_aug_"+str(i)+".pt")
+    torch.save(model, checkpoint_path+"checkpoint_"+str(i)+".pt") # change name to include aug if using augmentation
     if test_auc > best_test_auc_estimate:
         best_test_auc_estimate = test_auc
     #    torch.save(model, checkpoint_path+"checkpoint_aug_"+str(i)+".pt")
