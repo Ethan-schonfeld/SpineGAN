@@ -29,7 +29,8 @@ for picture_name in image_names:
     image_id = picture_name[:-4]
     if picture_name[-4:] == ".png":
         condition = annotations.loc[image_id, "lesion_type"]
-        try:
+        if type(condition) == str:
+            count += 1
             if condition == "No finding":
                 labels[picture_name] = 0
             elif condition == "Disc space narrowing":
@@ -49,8 +50,29 @@ for picture_name in image_names:
             else:
                 #os.remove(picture_name)
                 pass
+        elif len(set(condition)) == 1:
             count += 1
-        except:
+            condition = list(set(condition))[0]
+            if condition == "No finding":
+                labels[picture_name] = 0
+            elif condition == "Disc space narrowing":
+                labels[picture_name] = 1
+            elif condition == "Foraminal stenosis":
+                labels[picture_name] = 2
+            elif condition == "Osteophytes":
+                labels[picture_name] = 3
+            elif condition == "Spondylolysthesis":
+                labels[picture_name] = 4
+            elif condition == "Surgical implant":
+                labels[picture_name] = 5
+            elif condition == "Vertebral collapse":
+                labels[picture_name] = 6
+            elif condition == "Other lesions":
+                labels[picture_name] = 7
+            else:
+                #os.remove(picture_name)
+                pass
+        else:
             duplicates.append(image_id)
 duplicates = list(set(duplicates))
 print(len(duplicates))
