@@ -24,13 +24,11 @@ labels = {}
 image_names = list(os.listdir(image_directory))
 os.chdir(image_directory)
 duplicates = []
-count = 0
 for picture_name in image_names:
     image_id = picture_name[:-4]
     if picture_name[-4:] == ".png":
         condition = annotations.loc[image_id, "lesion_type"]
         if type(condition) == str:
-            count += 1
             if condition == "No finding":
                 labels[picture_name] = 0
             elif condition == "Disc space narrowing":
@@ -48,10 +46,8 @@ for picture_name in image_names:
             elif condition == "Other lesions":
                 labels[picture_name] = 7
             else:
-                #os.remove(picture_name)
-                pass
+                os.remove(picture_name)
         elif len(set(condition)) == 1:
-            count += 1
             condition = list(set(condition))[0]
             if condition == "No finding":
                 labels[picture_name] = 0
@@ -70,14 +66,14 @@ for picture_name in image_names:
             elif condition == "Other lesions":
                 labels[picture_name] = 7
             else:
-                #os.remove(picture_name)
-                pass
+                os.remove(picture_name)
         else:
-            duplicates.append(image_id)
+            duplicates.append(picture_name)
+
 duplicates = list(set(duplicates))
-print(len(duplicates))
-print(count)
-exit(0)
+
+for duplicate in duplicates:
+    os.remove(duplicate)
 
 # In[ ]:
 
