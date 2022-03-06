@@ -20,6 +20,18 @@ class Loss:
 
 #----------------------------------------------------------------------------
 
+PATH = "/home/ethanschonfeld/cs236g/SpineGAN/abnormality_detection/checkpoint_aug_19.pt"
+
+# Load SpineMultiClassifier
+
+SpineMultiClassifier = torch.load(PATH)
+# get number of parameters
+model_parameters = filter(lambda p: p.requires_grad, SpineMultiClassifier.parameters())
+params = sum([np.prod(p.size()) for p in model_parameters])
+print("Successfully loaded SpineMultiClassifier with parameter count: ", params)
+
+#----------------------------------------------------------------------------
+
 class StyleGAN2Loss(Loss):
     def __init__(self, device, G_mapping, G_synthesis, D, augment_pipe=None, style_mixing_prob=0.9, r1_gamma=10, pl_batch_shrink=2, pl_decay=0.01, pl_weight=2):
         super().__init__()
@@ -66,6 +78,29 @@ class StyleGAN2Loss(Loss):
             with torch.autograd.profiler.record_function('Gmain_forward'):
                 gen_img, _gen_ws = self.run_G(gen_z, gen_c, sync=(sync and not do_Gpl)) # May get synced by Gpl.
                 gen_logits = self.run_D(gen_img, gen_c, sync=False)
+                
+                # Here we add an additional loss term, using SpineMultiClassifier, a classifier for normal versus abnormal images.
+                gen_class = gen_c.cpu().detach().numpy()
+                print(gen_class.size())
+                exit(0)
+                
+                gen_class = gen_class[:,1]
+                # Now we need to preprocess the gen_img in order to input it into SpineClassifier which is a densenet. The required transforms can be found 
+                
+                # center crop to 224x224
+   
+                cropped_gen_img = gen_img[:, :, 16:240, 16:240]
+    
+                # copy the image of one channel to three of the same channels
+        
+                expanded_gen_img = torch.cat([cropped_gen_img, cropped_gen_img, cropped_gen_img], dim=1)
+                
+                # Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225])
+            
+                gen_image_processed = transforms.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225])(expanded_gen_img)
+            
+                classifier_result = SpineClassifier(gen_image_processed)
+                
                 training_stats.report('Loss/scores/fake', gen_logits)
                 training_stats.report('Loss/signs/fake', gen_logits.sign())
                 loss_Gmain = torch.nn.functional.softplus(-gen_logits) # -log(sigmoid(gen_logits))
