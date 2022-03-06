@@ -26,6 +26,7 @@ os.chdir(image_directory)
 for picture_name in image_names:
     print(picture_name[-4:])
     image_id = picture_name[:-4]
+    print(image_id)
     if picture_name[-4:] == ".png":
         condition = annotations.loc[image_id, "lesion_type"]
         if condition == "No finding":
@@ -45,7 +46,8 @@ for picture_name in image_names:
         elif condition == "Other lesions":
             labels[picture_name] = 7
         else:
-            os.remove(picture_name)
+            #os.remove(picture_name)
+            pass
 
 # In[ ]:
 
