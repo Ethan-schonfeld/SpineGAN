@@ -252,7 +252,7 @@ for i in range(0, 10000): # they used 10000
             train_X.to('cuda')
             
         # augment the images according to the augmentation defined above
-        #train_X = transform_augment(train_X).to('cuda')
+        train_X = transform_augment(train_X).to('cuda')
             
         outputs = model(train_X.to('cuda'))
         loss = criterion(outputs.to('cuda'), batch_labels.unsqueeze(1).to('cuda'))
@@ -289,7 +289,7 @@ for i in range(0, 10000): # they used 10000
         test_outputs = model(test_X.to('cuda'))
         test_auc = roc_auc_score(test_batch_labels.cpu().detach().numpy(), test_outputs.cpu().detach().numpy())
     print("Epoch ", i, " Test Sample AUC: ", test_auc)
-    torch.save(model, checkpoint_path+"checkpoint_gan_domain_"+str(i)+".pt") # change name to include aug if using augmentation
+    torch.save(model, checkpoint_path+"checkpoint_gan_domain_aug_"+str(i)+".pt") # change name to include aug if using augmentation
     if test_auc > best_test_auc_estimate:
         best_test_auc_estimate = test_auc
     #    torch.save(model, checkpoint_path+"checkpoint_aug_"+str(i)+".pt")
