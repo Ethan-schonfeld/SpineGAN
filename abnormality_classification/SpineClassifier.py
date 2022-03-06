@@ -122,10 +122,10 @@ for filename in train_gen_normal_file_list:
     train_labels.append(0)
     image = Image.open(filename)
     data = np.asarray(image)
-    print(data.shape)
-    exit(0)
     three_channel_data = np.repeat(data[:, :, np.newaxis], 3, axis=2)
     train_images.append(three_channel_data)
+    
+print("Made normal images")
     
 train_gen_abnormal_file_list = list(os.listdir(train_gen_abnormal_directory))
 os.chdir(train_gen_abnormal_directory)
@@ -139,7 +139,10 @@ for filename in train_gen_abnormal_file_list:
     three_channel_data = np.repeat(data[:, :, np.newaxis], 3, axis=2)
     train_images.append(three_channel_data)
     
+print("Made abnormal images")
+    
 train_images = np.asarray(train_images)
+print("Finalized training images")
 
 
 
@@ -281,7 +284,7 @@ for i in range(0, 10000): # they used 10000
         test_outputs = model(test_X.to('cuda'))
         test_auc = roc_auc_score(test_batch_labels.cpu().detach().numpy(), test_outputs.cpu().detach().numpy())
     print("Epoch ", i, " Test Sample AUC: ", test_auc)
-    torch.save(model, checkpoint_path+"checkpoint_"+str(i)+".pt") # change name to include aug if using augmentation
+    torch.save(model, checkpoint_path+"checkpoint_gan_"+str(i)+".pt") # change name to include aug if using augmentation
     if test_auc > best_test_auc_estimate:
         best_test_auc_estimate = test_auc
     #    torch.save(model, checkpoint_path+"checkpoint_aug_"+str(i)+".pt")
