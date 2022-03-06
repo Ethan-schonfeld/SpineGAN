@@ -22,19 +22,34 @@ annotations.index = annotations.loc[:, "image_id"]
 
 labels = {}
 image_names = list(os.listdir(image_directory))
+os.chdir(image_directory)
 for picture_name in image_names:
     print(picture_name[-4:])
     image_id = picture_name[:-4]
     if picture_name[-4:] == ".png":
         condition = annotations.loc[image_id, "lesion_type"]
-        print(image_id)
-        print(condition)
-        exit(0)
-    labels[picture_name] = 0
+        if condition == "No finding":
+            labels[picture_name] = 0
+        elif condition == "Disc space narrowing":
+            labels[picture_name] = 1
+        elif condition == "Foraminal stenosis”:
+            labels[picture_name] = 2
+        elif condition == "Osteophytes”:
+            labels[picture_name] = 3
+        elif condition == "Spondylolysthesis”:
+            labels[picture_name] = 4
+        elif condition == "Surgical implant”:
+            labels[picture_name] = 5
+        elif condition == "Vertebral collapse”:
+            labels[picture_name] = 6
+        elif condition == "Other lesions”:
+            labels[picture_name] = 7
+        else:
+            os.remove(picture_name)
 
 # In[ ]:
 
 
-with open("../stylegan2-ada-pytorch-main/abnormality_labels.json", "w") as outfile:
+with open("/home/ethanschonfeld/cs236g/SpineGAN/stylegan2-ada-pytorch-main/conditional_dataset/dataset.json", "w") as outfile:
     json.dump(labels, outfile)
 
