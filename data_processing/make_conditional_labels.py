@@ -28,7 +28,7 @@ for picture_name in image_names:
     print(image_id)
     exit(0)
     if picture_name[-4:] == ".png":
-        condition = 
+        pass
     exit(0)
     labels[picture_name] = 0
 
