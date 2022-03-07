@@ -326,33 +326,6 @@ for i in range(0, 10000): # they used 10000
         optimizer.step()
 
         epoch_loss += loss.item()
-        train_auc_0 = roc_auc_score(batch_labels[:,0].cpu().detach().numpy(), outputs[:,0].cpu().detach().numpy())
-        epoch_auc_estimation_0.append(train_auc_0)
-        train_auc_1 = roc_auc_score(batch_labels[:,1].cpu().detach().numpy(), outputs[:,1].cpu().detach().numpy())
-        epoch_auc_estimation_1.append(train_auc_1)
-        train_auc_2 = roc_auc_score(batch_labels[:,2].cpu().detach().numpy(), outputs[:,2].cpu().detach().numpy())
-        epoch_auc_estimation_2.append(train_auc_2)
-        train_auc_3 = roc_auc_score(batch_labels[:,3].cpu().detach().numpy(), outputs[:,3].cpu().detach().numpy())
-        epoch_auc_estimation_3.append(train_auc_3)
-        train_auc_4 = roc_auc_score(batch_labels[:,4].cpu().detach().numpy(), outputs[:,4].cpu().detach().numpy())
-        epoch_auc_estimation_4.append(train_auc_4)
-        train_auc_5 = roc_auc_score(batch_labels[:,5].cpu().detach().numpy(), outputs[:,5].cpu().detach().numpy())
-        epoch_auc_estimation_5.append(train_auc_5)
-        train_auc_6 = roc_auc_score(batch_labels[:,6].cpu().detach().numpy(), outputs[:,6].cpu().detach().numpy())
-        epoch_auc_estimation_6.append(train_auc_6)
-        train_auc_7 = roc_auc_score(batch_labels[:,7].cpu().detach().numpy(), outputs[:,7].cpu().detach().numpy())
-        epoch_auc_estimation_7.append(train_auc_7)
-        
-    print("Epoch ", i, " Train AUC estimation No finding: ", sum(epoch_auc_estimation_0)/len(epoch_auc_estimation_0))
-    print("Epoch ", i, " Train AUC estimation Disc space narrowing: ", sum(epoch_auc_estimation_1)/len(epoch_auc_estimation_1))
-    print("Epoch ", i, " Train AUC estimation Foraminal stenosis: ", sum(epoch_auc_estimation_2)/len(epoch_auc_estimation_2))
-    print("Epoch ", i, " Train AUC estimation Osteophytes: ", sum(epoch_auc_estimation_3)/len(epoch_auc_estimation_3))
-    print("Epoch ", i, " Train AUC estimation Spondylolysthesis: ", sum(epoch_auc_estimation_4)/len(epoch_auc_estimation_4))
-    print("Epoch ", i, " Train AUC estimation Surgical implant: ", sum(epoch_auc_estimation_5)/len(epoch_auc_estimation_5))
-    print("Epoch ", i, " Train AUC estimation Vertebral collapse: ", sum(epoch_auc_estimation_6)/len(epoch_auc_estimation_6))
-    print("Epoch ", i, " Train AUC estimation Other lesions: ", sum(epoch_auc_estimation_7)/len(epoch_auc_estimation_7))
-    print("Epoch ", i, " Train AUC estimation Average: ", (sum(epoch_auc_estimation_0)+sum(epoch_auc_estimation_1)+sum(epoch_auc_estimation_2)+sum(epoch_auc_estimation_3)+sum(epoch_auc_estimation_4)+sum(epoch_auc_estimation_5)+sum(epoch_auc_estimation_6)+sum(epoch_auc_estimation_7))/len(epoch_auc_estimation_0)*8)
-
                 
     print("Epoch ", i, " loss: ", epoch_loss)
     # get random sample of 600 of test images
@@ -376,39 +349,65 @@ for i in range(0, 10000): # they used 10000
     with torch.no_grad():
         test_outputs = model(test_X.to('cuda'))
         print("AUC No Finding: ")
-        test_auc_0 = roc_auc_score(test_batch_labels[:,0].cpu().detach().numpy(), test_outputs[:,0].cpu().detach().numpy())
-        print(test_auc_0)
+        try:
+            test_auc_0 = roc_auc_score(test_batch_labels[:,0].cpu().detach().numpy(), test_outputs[:,0].cpu().detach().numpy())
+            print(test_auc_0)
+        except:
+            print("NaN")
         
         print("AUC Disc space narrowing: ")
-        test_auc_1 = roc_auc_score(test_batch_labels[:,1].cpu().detach().numpy(), test_outputs[:,1].cpu().detach().numpy())
+        try:
+            test_auc_1 = roc_auc_score(test_batch_labels[:,1].cpu().detach().numpy(), test_outputs[:,1].cpu().detach().numpy())
         print(test_auc_1)
+        except:
+            print("NaN")
         
         print("Foraminal stenosis: ")
-        test_auc_2 = roc_auc_score(test_batch_labels[:,2].cpu().detach().numpy(), test_outputs[:,2].cpu().detach().numpy())
+        try:
+            test_auc_2 = roc_auc_score(test_batch_labels[:,2].cpu().detach().numpy(), test_outputs[:,2].cpu().detach().numpy())
         print(test_auc_2)
+        except:
+            print("NaN")
         
         print("AUC Osteophytes: ")
-        test_auc_3 = roc_auc_score(test_batch_labels[:,3].cpu().detach().numpy(), test_outputs[:,3].cpu().detach().numpy())
+        try:
+            test_auc_3 = roc_auc_score(test_batch_labels[:,3].cpu().detach().numpy(), test_outputs[:,3].cpu().detach().numpy())
         print(test_auc_3)
+        except:
+            print("NaN")
         
         print("AUC Spondylolysthesis: ")
-        test_auc_4 = roc_auc_score(test_batch_labels[:,4].cpu().detach().numpy(), test_outputs[:,4].cpu().detach().numpy())
+        try:
+            test_auc_4 = roc_auc_score(test_batch_labels[:,4].cpu().detach().numpy(), test_outputs[:,4].cpu().detach().numpy())
         print(test_auc_4)
+        except:
+            print("NaN")
         
         print("AUC Surgical implant: ")
-        test_auc_5 = roc_auc_score(test_batch_labels[:,5].cpu().detach().numpy(), test_outputs[:,5].cpu().detach().numpy())
+        try:
+            test_auc_5 = roc_auc_score(test_batch_labels[:,5].cpu().detach().numpy(), test_outputs[:,5].cpu().detach().numpy())
         print(test_auc_5)
+        except:
+            print("NaN")
         
         print("AUC Vertebral collapse: ")
-        test_auc_6 = roc_auc_score(test_batch_labels[:,6].cpu().detach().numpy(), test_outputs[:,6].cpu().detach().numpy())
+        try:
+            test_auc_6 = roc_auc_score(test_batch_labels[:,6].cpu().detach().numpy(), test_outputs[:,6].cpu().detach().numpy())
         print(test_auc_6)
+        except:
+            print("NaN")
         
         print("AUC Other lesions: ")
-        test_auc_7 = roc_auc_score(test_batch_labels[:,7].cpu().detach().numpy(), test_outputs[:,7].cpu().detach().numpy())
+        try:
+            test_auc_7 = roc_auc_score(test_batch_labels[:,7].cpu().detach().numpy(), test_outputs[:,7].cpu().detach().numpy())
         print(test_auc_7)
-        
-    print("Epoch ", i, " Test Sample AUC: ", (test_auc_0+test_auc_1+test_auc_2+test_auc_3+test_auc_4+test_auc_5+test_auc_6+test_auc_7)/8)
-    torch.save(model, checkpoint_path+"checkpoint_cond_aug_"+str(i)+".pt")
+        except:
+            print("NaN")
+    try:    
+        print("Epoch ", i, " Test Sample AUC: ", (test_auc_0+test_auc_1+test_auc_2+test_auc_3+test_auc_4+test_auc_5+test_auc_6+test_auc_7)/8)
+    except:
+        print("Epoch ", i, "Test Sample AUC: NaN")
+    torch.save(model, checkpoint_path+"checkpoint_cond_"+str(i)+".pt")
     if test_auc > best_test_auc_estimate:
         best_test_auc_estimate = test_auc
     #    torch.save(model, checkpoint_path+"checkpoint_aug_"+str(i)+".pt")
