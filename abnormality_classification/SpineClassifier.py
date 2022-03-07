@@ -31,11 +31,11 @@ checkpoint_path = "/home/ethanschonfeld/cs236g/SpineGAN/abnormality_classificati
 # In[ ]:
 
 
-#train_abnormality_directory = "/home/ethanschonfeld/cs236g/SpineGAN/stylegan2-ada-pytorch-main/abnormality_conditional_dataset/dataset.json"
-#train_image_directory = "/home/ethanschonfeld/cs236g/SpineGAN/stylegan2-ada-pytorch-main/abnormality_conditional_dataset/"
+train_abnormality_directory = "/home/ethanschonfeld/cs236g/SpineGAN/stylegan2-ada-pytorch-main/abnormality_conditional_dataset/dataset.json"
+train_image_directory = "/home/ethanschonfeld/cs236g/SpineGAN/stylegan2-ada-pytorch-main/abnormality_conditional_dataset/"
 
-train_gen_normal_directory = "/home/ethanschonfeld/cs236g/SpineGAN/generated/normal/"
-train_gen_abnormal_directory = "/home/ethanschonfeld/cs236g/SpineGAN/generated/abnormal/"
+train_gen_normal_directory = "/home/ethanschonfeld/cs236g/SpineGAN/domain_generated/normal/"
+train_gen_abnormal_directory = "/home/ethanschonfeld/cs236g/SpineGAN/domain_generated/abnormal/"
 
 
 # In[ ]:
@@ -68,9 +68,9 @@ transform_augment = transforms.Compose([
 
 
 # load in train abnormality labels
-#f = open(train_abnormality_directory)
-#train_abnormality_labels = json.load(f)
-#f.close()
+f = open(train_abnormality_directory)
+train_abnormality_labels = json.load(f)
+f.close()
 
 
 # In[ ]:
@@ -94,28 +94,28 @@ for index_number in (test_abnormality_dataset.index):
 
 
 # load in train image data and make labels
-#train_image_file_list = list(os.listdir(train_image_directory))
-#os.chdir(train_image_directory)
+train_image_file_list = list(os.listdir(train_image_directory))
+os.chdir(train_image_directory)
 train_labels = []
 train_images = []
-#for filename in train_image_file_list:
-#    extension = filename[-4:]
-#    if extension != ".png":
-#        continue
-#    try:
-#        label = train_abnormality_labels[filename]
-#        train_labels.append(label)
-#        image = Image.open(filename)
-#        data = np.asarray(image)
-#        three_channel_data = np.repeat(data[:, :, np.newaxis], 3, axis=2)
-#        train_images.append(three_channel_data)
-#    except:
-#        print(filename)
+for filename in train_image_file_list:
+    extension = filename[-4:]
+    if extension != ".png":
+        continue
+    try:
+        label = train_abnormality_labels[filename]
+        train_labels.append(label)
+        image = Image.open(filename)
+        data = np.asarray(image)
+        three_channel_data = np.repeat(data[:, :, np.newaxis], 3, axis=2)
+        train_images.append(three_channel_data)
+    except:
+        print(filename)
 
 # load in train gen image data and make labels
 train_gen_normal_file_list = list(os.listdir(train_gen_normal_directory))
 os.chdir(train_gen_normal_directory)
-for filename in train_gen_normal_file_list:
+for filename in train_gen_normal_file_list[:250]:
     extension = filename[-4:]
     if extension != ".png":
         continue
@@ -129,7 +129,7 @@ print("Made normal images")
     
 train_gen_abnormal_file_list = list(os.listdir(train_gen_abnormal_directory))
 os.chdir(train_gen_abnormal_directory)
-for filename in train_gen_abnormal_file_list:
+for filename in train_gen_abnormal_file_list[:250]:
     extension = filename[-4:]
     if extension != ".png":
         continue
@@ -289,7 +289,7 @@ for i in range(0, 10000): # they used 10000
         test_outputs = model(test_X.to('cuda'))
         test_auc = roc_auc_score(test_batch_labels.cpu().detach().numpy(), test_outputs.cpu().detach().numpy())
     print("Epoch ", i, " Test Sample AUC: ", test_auc)
-    torch.save(model, checkpoint_path+"checkpoint_stylegan_trained_only_aug_"+str(i)+".pt") # change name to include aug if using augmentation
+    torch.save(model, checkpoint_path+"checkpoint_domain_500_"+str(i)+".pt") # change name to include aug if using augmentation
     if test_auc > best_test_auc_estimate:
         best_test_auc_estimate = test_auc
     #    torch.save(model, checkpoint_path+"checkpoint_aug_"+str(i)+".pt")
