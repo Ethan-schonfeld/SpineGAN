@@ -14,6 +14,7 @@ import numpy as np
 import pandas as pd
 from PIL import Image
 from sklearn.metrics import roc_auc_score
+from sklearn.metrics import f1_score
 from sklearn.utils import class_weight
 import os
 import random
@@ -114,5 +115,7 @@ for file_name in os_list:
     with torch.no_grad():
         test_outputs = model(test_X.to('cuda'))
         test_auc = roc_auc_score(test_labels.cpu().detach().numpy(), test_outputs.cpu().detach().numpy())
+        fl_score = f1_score(test_labels.cpu().detach().numpy(), test_outputs.cpu().detach().numpy())
     print(file_name, " Test AUC: ", test_auc)
+    print(file_name, " Test F1: ", fl_score)
 
