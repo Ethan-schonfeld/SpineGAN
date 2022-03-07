@@ -117,9 +117,8 @@ for file_name in os_list:
         test_auc = roc_auc_score(test_labels.cpu().detach().numpy(), test_outputs.cpu().detach().numpy())
         try:
             fl_score = f1_score(np.round(test_labels.cpu().detach().numpy()), test_outputs.cpu().detach().numpy())
+            print(file_name, f1_score)
         except:
             print(file_name)
     print(file_name, " Test AUC: ", test_auc)
-    
-    print(file_name, " Test F1: ", fl_score)
 
