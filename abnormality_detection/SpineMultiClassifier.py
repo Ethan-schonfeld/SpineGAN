@@ -67,7 +67,9 @@ train_image_file_list = list(os.listdir(train_image_directory))
 os.chdir(train_image_directory)
 train_images = []
 train_labels = []
+count = 0
 for filename in train_image_file_list:
+    print(count)
     extension = filename[-4:]
     if extension != ".png":
         continue
@@ -97,6 +99,7 @@ for filename in train_image_file_list:
         three_channel_data = np.repeat(data[:, :, np.newaxis], 3, axis=2)
         train_images.append(three_channel_data)
         train_labels.append(label)
+        count += 1
     except:
         print(filename)
 train_images = np.asarray(train_images)
