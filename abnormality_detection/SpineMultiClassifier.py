@@ -229,7 +229,7 @@ class_weights_7 = {i : class_weights_7[i] for i in range(2)}
 # In[ ]:
 
 
-model = models.densenet201(pretrained=True)
+model = models.densenet121(pretrained=True)
 model = nn.Sequential(
     model,
     nn.Linear(in_features=1000, out_features=8, bias=True),
