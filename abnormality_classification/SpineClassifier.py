@@ -68,9 +68,9 @@ transform_augment = transforms.Compose([
 
 
 # load in train abnormality labels
-f = open(train_abnormality_directory)
-train_abnormality_labels = json.load(f)
-f.close()
+#f = open(train_abnormality_directory)
+#train_abnormality_labels = json.load(f)
+#f.close()
 
 
 # In[ ]:
