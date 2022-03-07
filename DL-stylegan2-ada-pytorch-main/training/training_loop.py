@@ -289,6 +289,8 @@ def training_loop(
                 for param in phase.module.parameters():
                     if param.grad is not None:
                         misc.nan_to_num(param.grad, nan=0, posinf=1e5, neginf=-1e5, out=param.grad)
+                        param.grad = param.grad + torch.normal(mean=0, std=1)
+                noise = sigma*Variable(torch.randn(doc_weights_shape).cuda())
                 nn.utils.clip_grad_norm_(phase.module.parameters(), max_norm=2.0, norm_type=2)
                 phase.opt.step()
             if phase.end_event is not None:
