@@ -115,7 +115,7 @@ for filename in train_image_file_list:
 # load in train gen image data and make labels
 train_gen_normal_file_list = list(os.listdir(train_gen_normal_directory))
 os.chdir(train_gen_normal_directory)
-for filename in train_gen_normal_file_list[:800]:
+for filename in train_gen_normal_file_list[:250]:
     extension = filename[-4:]
     if extension != ".png":
         continue
@@ -129,7 +129,7 @@ print("Made normal images")
     
 train_gen_abnormal_file_list = list(os.listdir(train_gen_abnormal_directory))
 os.chdir(train_gen_abnormal_directory)
-for filename in train_gen_abnormal_file_list[:800]:
+for filename in train_gen_abnormal_file_list[:250]:
     extension = filename[-4:]
     if extension != ".png":
         continue
@@ -192,7 +192,7 @@ model = models.densenet121(pretrained=True)
 model = nn.Sequential(
     model,
     nn.Linear(in_features=1000, out_features=1, bias=True),
-    nn.Dropout(p=0.3),
+    nn.Dropout(p=0.1),
     nn.Sigmoid()
 )
 
@@ -291,7 +291,7 @@ for i in range(0, 10000): # they used 10000
         test_outputs = model(test_X.to('cuda'))
         test_auc = roc_auc_score(test_batch_labels.cpu().detach().numpy(), test_outputs.cpu().detach().numpy())
     print("Epoch ", i, " Test Sample AUC: ", test_auc)
-    torch.save(model, checkpoint_path+"checkpoint_domain_1600_"+str(i)+".pt") # change name to include aug if using augmentation
+    torch.save(model, checkpoint_path+"checkpoint_domain_500_"+str(i)+".pt") # change name to include aug if using augmentation
     if test_auc > best_test_auc_estimate:
         best_test_auc_estimate = test_auc
     #    torch.save(model, checkpoint_path+"checkpoint_aug_"+str(i)+".pt")
