@@ -148,6 +148,7 @@ train_images, train_labels = zip(*c)
 
 train_images = np.asarray(train_images)
 print("Finalized training images")
+print(train_images.shape)
 
 
 
