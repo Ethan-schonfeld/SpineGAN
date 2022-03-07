@@ -115,10 +115,11 @@ for file_name in os_list:
     with torch.no_grad():
         test_outputs = model(test_X.to('cuda'))
         test_auc = roc_auc_score(test_labels.cpu().detach().numpy(), test_outputs.cpu().detach().numpy())
-        fl_score = f1_score(np.round(test_labels.cpu().detach().numpy()), test_outputs.cpu().detach().numpy())
+        try:
+            fl_score = f1_score(np.round(test_labels.cpu().detach().numpy()), test_outputs.cpu().detach().numpy())
+        except:
+            print(file_name)
     print(file_name, " Test AUC: ", test_auc)
-    try:
-        print(file_name, " Test F1: ", fl_score)
-    except:
-        print(file_name)
+    
+    print(file_name, " Test F1: ", fl_score)
 
