@@ -46,7 +46,7 @@ def setup_training_loop_kwargs(
     cfg        = None, # Base config: 'auto' (default), 'stylegan2', 'paper256', 'paper512', 'paper1024', 'cifar'
     gamma      = None, # Override R1 gamma: <float>
     kimg       = None, # Override training duration: <int>
-    batch      = None, # Override batch size: <int>
+    batch      = 1, # Override batch size: <int>
 
     # Discriminator augmentation.
     aug        = None, # Augmentation mode: 'ada' (default), 'noaug', 'fixed'
