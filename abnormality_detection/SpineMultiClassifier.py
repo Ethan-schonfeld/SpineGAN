@@ -408,9 +408,6 @@ for i in range(0, 10000): # they used 10000
     except:
         print("Epoch ", i, "Test Sample AUC: NaN")
     torch.save(model, checkpoint_path+"checkpoint_cond_"+str(i)+".pt")
-    if test_auc > best_test_auc_estimate:
-        best_test_auc_estimate = test_auc
-    #    torch.save(model, checkpoint_path+"checkpoint_aug_"+str(i)+".pt")
 
 
 # In[ ]:
