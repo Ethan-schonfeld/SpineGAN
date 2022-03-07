@@ -113,9 +113,9 @@ for filename in train_image_file_list:
         print(filename)
 
 # load in train gen image data and make labels
-train_gen_normal_file_list = list(os.listdir(train_gen_normal_directory[:250]))
+train_gen_normal_file_list = list(os.listdir(train_gen_normal_directory))
 os.chdir(train_gen_normal_directory)
-for filename in train_gen_normal_file_list:
+for filename in train_gen_normal_file_list[:250]:
     extension = filename[-4:]
     if extension != ".png":
         continue
@@ -127,9 +127,9 @@ for filename in train_gen_normal_file_list:
     
 print("Made normal images")
     
-train_gen_abnormal_file_list = list(os.listdir(train_gen_abnormal_directory[:250]))
+train_gen_abnormal_file_list = list(os.listdir(train_gen_abnormal_directory))
 os.chdir(train_gen_abnormal_directory)
-for filename in train_gen_abnormal_file_list:
+for filename in train_gen_abnormal_file_list[:250]:
     extension = filename[-4:]
     if extension != ".png":
         continue
