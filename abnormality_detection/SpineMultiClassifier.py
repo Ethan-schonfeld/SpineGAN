@@ -116,7 +116,9 @@ test_image_file_list = list(os.listdir(test_image_directory))
 os.chdir(test_image_directory)
 test_images = []
 test_labels = []
+count = 0
 for filename in test_image_file_list:
+    print(count)
     extension = filename[-4:]
     if extension != ".png":
         continue
@@ -146,6 +148,7 @@ for filename in test_image_file_list:
         three_channel_data = np.repeat(data[:, :, np.newaxis], 3, axis=2)
         test_images.append(three_channel_data)
         test_labels.append(label)
+        count += 1
     except:
         print(filename)
 test_images = np.asarray(test_images)
