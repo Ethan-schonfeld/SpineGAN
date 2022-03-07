@@ -192,6 +192,7 @@ model = models.densenet121(pretrained=True)
 model = nn.Sequential(
     model,
     nn.Linear(in_features=1000, out_features=1, bias=True),
+    nn.Dropout(p=0.3),
     nn.Sigmoid()
 )
 
