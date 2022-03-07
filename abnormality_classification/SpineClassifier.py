@@ -34,8 +34,8 @@ checkpoint_path = "/home/ethanschonfeld/cs236g/SpineGAN/abnormality_classificati
 train_abnormality_directory = "/home/ethanschonfeld/cs236g/SpineGAN/stylegan2-ada-pytorch-main/abnormality_conditional_dataset/dataset.json"
 train_image_directory = "/home/ethanschonfeld/cs236g/SpineGAN/stylegan2-ada-pytorch-main/abnormality_conditional_dataset/"
 
-train_gen_normal_directory = "/home/ethanschonfeld/cs236g/SpineGAN/generated/normal/"
-train_gen_abnormal_directory = "/home/ethanschonfeld/cs236g/SpineGAN/generated/abnormal/"
+train_gen_normal_directory = "/home/ethanschonfeld/cs236g/SpineGAN/domain_generated/normal/"
+train_gen_abnormal_directory = "/home/ethanschonfeld/cs236g/SpineGAN/domain_generated/abnormal/"
 
 
 # In[ ]:
@@ -291,7 +291,7 @@ for i in range(0, 10000): # they used 10000
         test_outputs = model(test_X.to('cuda'))
         test_auc = roc_auc_score(test_batch_labels.cpu().detach().numpy(), test_outputs.cpu().detach().numpy())
     print("Epoch ", i, " Test Sample AUC: ", test_auc)
-    torch.save(model, checkpoint_path+"checkpoint_hidden_all_"+str(i)+".pt") # change name to include aug if using augmentation
+    torch.save(model, checkpoint_path+"checkpoint_domainhidden_all_"+str(i)+".pt") # change name to include aug if using augmentation
     if test_auc > best_test_auc_estimate:
         best_test_auc_estimate = test_auc
     #    torch.save(model, checkpoint_path+"checkpoint_aug_"+str(i)+".pt")
