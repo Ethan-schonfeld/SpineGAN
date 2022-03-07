@@ -358,49 +358,49 @@ for i in range(0, 10000): # they used 10000
         print("AUC Disc space narrowing: ")
         try:
             test_auc_1 = roc_auc_score(test_batch_labels[:,1].cpu().detach().numpy(), test_outputs[:,1].cpu().detach().numpy())
-        print(test_auc_1)
+            print(test_auc_1)
         except:
             print("NaN")
         
         print("Foraminal stenosis: ")
         try:
             test_auc_2 = roc_auc_score(test_batch_labels[:,2].cpu().detach().numpy(), test_outputs[:,2].cpu().detach().numpy())
-        print(test_auc_2)
+            print(test_auc_2)
         except:
             print("NaN")
         
         print("AUC Osteophytes: ")
         try:
             test_auc_3 = roc_auc_score(test_batch_labels[:,3].cpu().detach().numpy(), test_outputs[:,3].cpu().detach().numpy())
-        print(test_auc_3)
+            print(test_auc_3)
         except:
             print("NaN")
         
         print("AUC Spondylolysthesis: ")
         try:
             test_auc_4 = roc_auc_score(test_batch_labels[:,4].cpu().detach().numpy(), test_outputs[:,4].cpu().detach().numpy())
-        print(test_auc_4)
+            print(test_auc_4)
         except:
             print("NaN")
         
         print("AUC Surgical implant: ")
         try:
             test_auc_5 = roc_auc_score(test_batch_labels[:,5].cpu().detach().numpy(), test_outputs[:,5].cpu().detach().numpy())
-        print(test_auc_5)
+            print(test_auc_5)
         except:
             print("NaN")
         
         print("AUC Vertebral collapse: ")
         try:
             test_auc_6 = roc_auc_score(test_batch_labels[:,6].cpu().detach().numpy(), test_outputs[:,6].cpu().detach().numpy())
-        print(test_auc_6)
+            print(test_auc_6)
         except:
             print("NaN")
         
         print("AUC Other lesions: ")
         try:
             test_auc_7 = roc_auc_score(test_batch_labels[:,7].cpu().detach().numpy(), test_outputs[:,7].cpu().detach().numpy())
-        print(test_auc_7)
+            print(test_auc_7)
         except:
             print("NaN")
     try:    
