@@ -453,16 +453,16 @@ for i in range(0, 10000): # they used 10000
             
         # augment the images according to the augmentation defined above
         train_X = transform_augment(train_X).to('cuda')
-            
+            # if training with real images, need to unsqueeze(1) batch labels
         outputs = model(train_X).to('cuda')
-        loss_0 = criterion_0(outputs[:,0].to('cuda'), batch_labels[:,0].unsqueeze(1).to('cuda'))
-        loss_1 = criterion_1(outputs[:,1].to('cuda'), batch_labels[:,1].unsqueeze(1).to('cuda'))
-        loss_2 = criterion_2(outputs[:,2].to('cuda'), batch_labels[:,2].unsqueeze(1).to('cuda'))
-        loss_3 = criterion_3(outputs[:,3].to('cuda'), batch_labels[:,3].unsqueeze(1).to('cuda'))
-        loss_4 = criterion_4(outputs[:,4].to('cuda'), batch_labels[:,4].unsqueeze(1).to('cuda'))
-        loss_5 = criterion_5(outputs[:,5].to('cuda'), batch_labels[:,5].unsqueeze(1).to('cuda'))
-        loss_6 = criterion_6(outputs[:,6].to('cuda'), batch_labels[:,6].unsqueeze(1).to('cuda'))
-        loss_7 = criterion_7(outputs[:,7].to('cuda'), batch_labels[:,7].unsqueeze(1).to('cuda'))
+        loss_0 = criterion_0(outputs[:,0].to('cuda'), batch_labels[:,0].to('cuda'))
+        loss_1 = criterion_1(outputs[:,1].to('cuda'), batch_labels[:,1].to('cuda'))
+        loss_2 = criterion_2(outputs[:,2].to('cuda'), batch_labels[:,2].to('cuda'))
+        loss_3 = criterion_3(outputs[:,3].to('cuda'), batch_labels[:,3].to('cuda'))
+        loss_4 = criterion_4(outputs[:,4].to('cuda'), batch_labels[:,4].to('cuda'))
+        loss_5 = criterion_5(outputs[:,5].to('cuda'), batch_labels[:,5].to('cuda'))
+        loss_6 = criterion_6(outputs[:,6].to('cuda'), batch_labels[:,6].to('cuda'))
+        loss_7 = criterion_7(outputs[:,7].to('cuda'), batch_labels[:,7].to('cuda'))
         loss = loss_0+loss_1+loss_2+loss_3+loss_4+loss_5+loss_6+loss_7
         loss.backward()
         optimizer.step()
