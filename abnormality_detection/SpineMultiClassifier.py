@@ -131,7 +131,7 @@ for filename in train_image_file_list:
     extension = filename[-4:]
     if extension != ".png":
         continuebel = np.zeros(8)
-    la
+    label = np.zeros(8)
     image = Image.open(filename)
     data = np.asarray(image)
     three_channel_data = np.repeat(data[:, :, np.newaxis], 3, axis=2)
