@@ -114,35 +114,35 @@ for file in files_list:
     with torch.no_grad():
         test_outputs = model(test_X.to('cuda'))
         try:
-            test_auc_0 = roc_auc_score(test_batch_labels[:,0].cpu().detach().numpy(), test_outputs[:,0].cpu().detach().numpy())
+            test_auc_0 = roc_auc_score(test_labels[:,0].cpu().detach().numpy(), test_outputs[:,0].cpu().detach().numpy())
         except:
             print("NaN")
         try:
-            test_auc_1 = roc_auc_score(test_batch_labels[:,1].cpu().detach().numpy(), test_outputs[:,1].cpu().detach().numpy())
+            test_auc_1 = roc_auc_score(test_labels[:,1].cpu().detach().numpy(), test_outputs[:,1].cpu().detach().numpy())
         except:
             print("NaN")
         try:
-            test_auc_2 = roc_auc_score(test_batch_labels[:,2].cpu().detach().numpy(), test_outputs[:,2].cpu().detach().numpy())
+            test_auc_2 = roc_auc_score(test_labels[:,2].cpu().detach().numpy(), test_outputs[:,2].cpu().detach().numpy())
         except:
             print("NaN")
         try:
-            test_auc_3 = roc_auc_score(test_batch_labels[:,3].cpu().detach().numpy(), test_outputs[:,3].cpu().detach().numpy())
+            test_auc_3 = roc_auc_score(test_labels[:,3].cpu().detach().numpy(), test_outputs[:,3].cpu().detach().numpy())
         except:
             print("NaN")
         try:
-            test_auc_4 = roc_auc_score(test_batch_labels[:,4].cpu().detach().numpy(), test_outputs[:,4].cpu().detach().numpy())
+            test_auc_4 = roc_auc_score(test_labels[:,4].cpu().detach().numpy(), test_outputs[:,4].cpu().detach().numpy())
         except:
             print("NaN")
         try:
-            test_auc_5 = roc_auc_score(test_batch_labels[:,5].cpu().detach().numpy(), test_outputs[:,5].cpu().detach().numpy())
+            test_auc_5 = roc_auc_score(test_labels[:,5].cpu().detach().numpy(), test_outputs[:,5].cpu().detach().numpy())
         except:
             print("NaN")
         try:
-            test_auc_6 = roc_auc_score(test_batch_labels[:,6].cpu().detach().numpy(), test_outputs[:,6].cpu().detach().numpy())
+            test_auc_6 = roc_auc_score(test_labels[:,6].cpu().detach().numpy(), test_outputs[:,6].cpu().detach().numpy())
         except:
             print("NaN")
         try:
-            test_auc_7 = roc_auc_score(test_batch_labels[:,7].cpu().detach().numpy(), test_outputs[:,7].cpu().detach().numpy())
+            test_auc_7 = roc_auc_score(test_labels[:,7].cpu().detach().numpy(), test_outputs[:,7].cpu().detach().numpy())
         except:
             print("NaN")
     try:    
