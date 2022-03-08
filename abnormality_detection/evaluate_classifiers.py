@@ -103,6 +103,7 @@ test_labels = torch.Tensor(test_labels)
 # In[ ]:
 
 files_list = os.listdir(checkpoint_path)
+os.chdir(checkpoint_path)
 for file in files_list:
     if file[0] != "c":
         continue
