@@ -52,8 +52,25 @@ checkpoint_path = "/home/ethanschonfeld/cs236g/SpineGAN/abnormality_detection/"
 # In[ ]:
 
 
-train_label_directory = "/home/ethanschonfeld/cs236g/vindr/annotations/train.csv"
-train_image_directory = "/home/ethanschonfeld/cs236g/SpineGAN/stylegan2-ada-pytorch-main/abnormality_conditional_dataset/"
+#train_label_directory = "/home/ethanschonfeld/cs236g/vindr/annotations/train.csv"
+#train_image_directory = "/home/ethanschonfeld/cs236g/SpineGAN/stylegan2-ada-pytorch-main/abnormality_conditional_dataset/"
+
+generated_no_finding_directory =  "/home/ethanschonfeld/cs236g/SpineGAN/generated/no_finding/"
+generated_disc_space_narrowing_directory =  "/home/ethanschonfeld/cs236g/SpineGAN/generated/disc_space_narrowing/"
+generated_foraminal_stenosis_directory =  "/home/ethanschonfeld/cs236g/SpineGAN/generated/foraminal_stenosis/"
+generated_osteophytes_directory =  "/home/ethanschonfeld/cs236g/SpineGAN/generated/osteophytes/"
+generated_spondylolysthesis_directory =  "/home/ethanschonfeld/cs236g/SpineGAN/generated/spondylolysthesis/"
+generated_surgical_implant_directory =  "/home/ethanschonfeld/cs236g/SpineGAN/generated/surgical_implant/"
+generated_vertebral_collapse_directory =  "/home/ethanschonfeld/cs236g/SpineGAN/generated/vertebral_collapse/"
+generated_other_lesions_directory =  "/home/ethanschonfeld/cs236g/SpineGAN/generated/other_lesions/"
+
+
+
+
+
+
+
+
 test_label_directory = "/home/ethanschonfeld/cs236g/vindr/annotations/test.csv"
 test_image_directory = "/home/ethanschonfeld/cs236g/test_dataset/"
 
@@ -61,54 +78,169 @@ test_image_directory = "/home/ethanschonfeld/cs236g/test_dataset/"
 # In[ ]:
 
 
-print("Loading in train images and labels")
-train_annotations = pd.read_csv(train_label_directory)
-train_image_file_list = list(os.listdir(train_image_directory))
-os.chdir(train_image_directory)
+#print("Loading in train images and labels")
+#train_annotations = pd.read_csv(train_label_directory)
+#train_image_file_list = list(os.listdir(train_image_directory))
+#os.chdir(train_image_directory)
+#train_images = []
+#train_labels = []
+#count = 0
+#for filename in train_image_file_list:
+#    print(count)
+#    extension = filename[-4:]
+#    if extension != ".png":
+#        continue
+#    try:
+#        image = Image.open(filename)
+#        label = np.zeros(8)
+#        for idx_number in train_annotations.index:
+#            if train_annotations.loc[idx_number, "image_id"] == filename[:-4]:
+#                lesion_type = train_annotations.loc[idx_number, "lesion_type"]
+#                if lesion_type == "No finding":
+#                    label[0] = 1
+#                elif lesion_type == "Disc space narrowing":
+#                    label[1] = 1
+#                elif lesion_type == "Foraminal stenosis":
+#                    label[2] = 1
+#                elif lesion_type == "Osteophytes":
+#                    label[3] = 1
+#                elif lesion_type == "Spondylolysthesis":
+#                    label[4] = 1
+#                elif lesion_type == "Surgical implant":
+#                    label[5] = 1
+#                elif lesion_type == "Vertebral collapse":
+#                    label[6] = 1
+#                elif lesion_type == "Other lesions":
+#                    label[7] = 1
+#        data = np.asarray(image)
+#        three_channel_data = np.repeat(data[:, :, np.newaxis], 3, axis=2)
+#        train_images.append(three_channel_data)
+#        train_labels.append(label)
+#        count += 1
+#    except:
+#        print(filename)
+#train_images = np.asarray(train_images)
+#train_labels = np.asarray(train_labels)
+#print("Loaded!")
+
 train_images = []
 train_labels = []
-count = 0
+train_image_file_list = os.listdir(generated_no_finding_directory)
+os.chdir(generated_no_finding_directory)
 for filename in train_image_file_list:
-    print(count)
+    extension = filename[-4:]
+    if extension != ".png":
+        continuebel = np.zeros(8)
+    la
+    image = Image.open(filename)
+    data = np.asarray(image)
+    three_channel_data = np.repeat(data[:, :, np.newaxis], 3, axis=2)
+    train_images.append(three_channel_data)
+    label[0] = 1
+    train_labels.append(label)
+    
+train_image_file_list = os.listdir(generated_disc_space_narrowing_directory)
+os.chdir(generated_disc_space_narrowing_directory)
+for filename in train_image_file_list:
     extension = filename[-4:]
     if extension != ".png":
         continue
-    try:
-        image = Image.open(filename)
-        label = np.zeros(8)
-        for idx_number in train_annotations.index:
-            if train_annotations.loc[idx_number, "image_id"] == filename[:-4]:
-                lesion_type = train_annotations.loc[idx_number, "lesion_type"]
-                if lesion_type == "No finding":
-                    label[0] = 1
-                elif lesion_type == "Disc space narrowing":
-                    label[1] = 1
-                elif lesion_type == "Foraminal stenosis":
-                    label[2] = 1
-                elif lesion_type == "Osteophytes":
-                    label[3] = 1
-                elif lesion_type == "Spondylolysthesis":
-                    label[4] = 1
-                elif lesion_type == "Surgical implant":
-                    label[5] = 1
-                elif lesion_type == "Vertebral collapse":
-                    label[6] = 1
-                elif lesion_type == "Other lesions":
-                    label[7] = 1
-        data = np.asarray(image)
-        three_channel_data = np.repeat(data[:, :, np.newaxis], 3, axis=2)
-        train_images.append(three_channel_data)
-        train_labels.append(label)
-        count += 1
-    except:
-        print(filename)
-train_images = np.asarray(train_images)
-train_labels = np.asarray(train_labels)
-print("Loaded!")
-
+    label = np.zeros(8)
+    image = Image.open(filename)
+    data = np.asarray(image)
+    three_channel_data = np.repeat(data[:, :, np.newaxis], 3, axis=2)
+    train_images.append(three_channel_data)
+    label[1] = 1
+    train_labels.append(label)
+    
+train_image_file_list = os.listdir(generated_foraminal_stenosis_directory)
+os.chdir(generated_foraminal_stenosis_directory)
+for filename in train_image_file_list:
+    extension = filename[-4:]
+    if extension != ".png":
+        continue
+    label = np.zeros(8)
+    image = Image.open(filename)
+    data = np.asarray(image)
+    three_channel_data = np.repeat(data[:, :, np.newaxis], 3, axis=2)
+    train_images.append(three_channel_data)
+    label[2] = 1
+    train_labels.append(label)
+    
+train_image_file_list = os.listdir(generated_osteophytes_directory)
+os.chdir(generated_osteophytes_directory)
+for filename in train_image_file_list:
+    extension = filename[-4:]
+    if extension != ".png":
+        continue
+    label = np.zeros(8)
+    image = Image.open(filename)
+    data = np.asarray(image)
+    three_channel_data = np.repeat(data[:, :, np.newaxis], 3, axis=2)
+    train_images.append(three_channel_data)
+    label[3] = 1
+    train_labels.append(label)
+    
+train_image_file_list = os.listdir(generated_spondylolysthesis_directory)
+os.chdir(generated_spondylolysthesis_directory)
+for filename in train_image_file_list:
+    extension = filename[-4:]
+    if extension != ".png":
+        continue
+    label = np.zeros(8)
+    image = Image.open(filename)
+    data = np.asarray(image)
+    three_channel_data = np.repeat(data[:, :, np.newaxis], 3, axis=2)
+    train_images.append(three_channel_data)
+    label[4] = 1
+    train_labels.append(label)
+    
+train_image_file_list = os.listdir(generated_surgical_implant_directory)
+os.chdir(generated_surgical_implant_directory)
+for filename in train_image_file_list:
+    extension = filename[-4:]
+    if extension != ".png":
+        continue
+    label = np.zeros(8)
+    image = Image.open(filename)
+    data = np.asarray(image)
+    three_channel_data = np.repeat(data[:, :, np.newaxis], 3, axis=2)
+    train_images.append(three_channel_data)
+    label[5] = 1
+    train_labels.append(label)
+    
+train_image_file_list = os.listdir(generated_vertebral_collapse_directory)
+os.chdir(generated_vertebral_collapse_directory)
+for filename in train_image_file_list:
+    extension = filename[-4:]
+    if extension != ".png":
+        continue
+    label = np.zeros(8)
+    image = Image.open(filename)
+    data = np.asarray(image)
+    three_channel_data = np.repeat(data[:, :, np.newaxis], 3, axis=2)
+    train_images.append(three_channel_data)
+    label[6] = 1
+    train_labels.append(label)
+    
+train_image_file_list = os.listdir(generated_other_lesions_directory)
+os.chdir(generated_other_lesions_directory)
+for filename in train_image_file_list:
+    extension = filename[-4:]
+    if extension != ".png":
+        continue
+    label = np.zeros(8)
+    image = Image.open(filename)
+    data = np.asarray(image)
+    three_channel_data = np.repeat(data[:, :, np.newaxis], 3, axis=2)
+    train_images.append(three_channel_data)
+    label[7] = 1
+    train_labels.append(label)
+    
 
 # In[ ]:
-
+train_images = np.asarray(train_images)
+train_labels = np.asarray(train_labels)
 
 print("Loading in test images and labels")
 test_annotations = pd.read_csv(test_label_directory)
@@ -260,15 +392,25 @@ def BCELoss_class_weighted(weights):
 # In[ ]:
 
 
-criterion_0 = BCELoss_class_weighted(class_weights_0)
-criterion_1 = BCELoss_class_weighted(class_weights_1)
-criterion_2 = BCELoss_class_weighted(class_weights_2)
-criterion_3 = BCELoss_class_weighted(class_weights_3)
-criterion_4 = BCELoss_class_weighted(class_weights_4)
-criterion_5 = BCELoss_class_weighted(class_weights_5)
-criterion_6 = BCELoss_class_weighted(class_weights_6)
-criterion_7 = BCELoss_class_weighted(class_weights_7)
+#criterion_0 = BCELoss_class_weighted(class_weights_0)
+#criterion_1 = BCELoss_class_weighted(class_weights_1)
+#criterion_2 = BCELoss_class_weighted(class_weights_2)
+#criterion_3 = BCELoss_class_weighted(class_weights_3)
+#criterion_4 = BCELoss_class_weighted(class_weights_4)
+#criterion_5 = BCELoss_class_weighted(class_weights_5)
+#criterion_6 = BCELoss_class_weighted(class_weights_6)
+#criterion_7 = BCELoss_class_weighted(class_weights_7)
 optimizer = optim.Adam(model.parameters(), lr=0.001)
+
+
+criterion_0 = nn.BCELoss()
+criterion_1 = nn.BCELoss()
+criterion_2 = nn.BCELoss()
+criterion_3 = nn.BCELoss()
+criterion_4 = nn.BCELoss()
+criterion_5 = nn.BCELoss()
+criterion_6 = nn.BCELoss()
+criterion_7 = nn.BCELoss()
 
 
 # In[1]:
@@ -407,7 +549,7 @@ for i in range(0, 10000): # they used 10000
         print("Epoch ", i, " Test Sample AUC: ", (test_auc_0+test_auc_1+test_auc_2+test_auc_3+test_auc_4+test_auc_5+test_auc_6+test_auc_7)/8)
     except:
         print("Epoch ", i, "Test Sample AUC: NaN")
-    torch.save(model, checkpoint_path+"checkpoint_cond_"+str(i)+".pt")
+    torch.save(model, checkpoint_path+"checkpoint_cond_gan_"+str(i)+".pt")
 
 
 # In[ ]:
