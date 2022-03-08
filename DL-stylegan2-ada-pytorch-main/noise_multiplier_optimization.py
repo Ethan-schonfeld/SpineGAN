@@ -38,7 +38,7 @@ for noise in x_noise:
 # In[10]:
 
 
-plt.scatter(x_noise, y_epsilon)
+plt.scatter(x_noise, np.log(y_epsilon))
 plt.xlabel('Estimated Noise Multiplier (noise standard deviation/clipping norm)')
 plt.ylabel('Epsilon')
 
