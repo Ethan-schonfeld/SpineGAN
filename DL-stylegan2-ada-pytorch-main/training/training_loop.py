@@ -100,7 +100,7 @@ def training_loop(
     random_seed             = 0,        # Global random seed.
     num_gpus                = 1,        # Number of GPUs participating in the training.
     rank                    = 0,        # Rank of the current process in [0, num_gpus[.
-    batch_size              = 4,        # Total batch size for one training iteration. Can be larger than batch_gpu * num_gpus.
+    batch_size              = 1,        # Total batch size for one training iteration. Can be larger than batch_gpu * num_gpus.
     batch_gpu               = 4,        # Number of samples processed at a time by one GPU.
     ema_kimg                = 10,       # Half-life of the exponential moving average (EMA) of generator weights.
     ema_rampup              = None,     # EMA ramp-up coefficient.
@@ -290,7 +290,7 @@ def training_loop(
                 for param in phase.module.parameters():
                     if param.grad is not None:
                         param.grad = param.grad.cuda() + (torch.randn(param.size()) * 0.02).cuda()
-                nn.utils.clip_grad_norm_(phase.module.parameters(), max_norm=1.5, norm_type=2)
+                #nn.utils.clip_grad_norm_(phase.module.parameters(), max_norm=1.5, norm_type=2)
                 phase.opt.step()
             if phase.end_event is not None:
                 phase.end_event.record(torch.cuda.current_stream(device))
