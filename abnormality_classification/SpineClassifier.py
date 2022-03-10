@@ -20,29 +20,50 @@ import sys
 import random
 import json
 import matplotlib.pyplot as plt
+import argparse
 
 
 # In[ ]:
 
+my_parser = argparse.ArgumentParser(description='Abnormality Classification')
+my_parser.add_argument('path',
+                       help='desired checkpoint path')
+my_parser.add_argument('train_labels',
+                       help='path to training json dataset for labels')
+my_parser.add_argument('train_images',
+                       help='path to folder with training images')
+my_parser.add_argument('gen_images_0',
+                       help='path to folder with generated images of class 0')
+my_parser.add_argument('gen_images_1',
+                       help='path to folder with generated images of class 1')
 
 checkpoint_path = "/home/ethanschonfeld/cs236g/SpineGAN/abnormality_classification/"
+my_parser.add_argument('val_labels',
+                       help='path to training csv dataset for labels')
+my_parser.add_argument('val_images',
+                       help='path to folder with validation images')
+
+# In[ ]:
+
+args = my_parser.parse_args()
+
+#train_abnormality_directory = "/home/ethanschonfeld/cs236g/SpineGAN/stylegan2-ada-pytorch-main/abnormality_conditional_dataset/dataset.json"
+train_abnormality_directory = args.train_labels
+#train_image_directory = "/home/ethanschonfeld/cs236g/SpineGAN/stylegan2-ada-pytorch-main/abnormality_conditional_dataset/"
+train_image_directory = args.train_images
+#train_gen_normal_directory = "/home/ethanschonfeld/cs236g/SpineGAN/domain_generated/normal/"
+train_gen_normal_directory = args.gen_images_0
+#train_gen_abnormal_directory = "/home/ethanschonfeld/cs236g/SpineGAN/domain_generated/abnormal/"
+train_gen_abnormal_directory = args.gen_images_1
 
 
 # In[ ]:
 
 
-train_abnormality_directory = "/home/ethanschonfeld/cs236g/SpineGAN/stylegan2-ada-pytorch-main/abnormality_conditional_dataset/dataset.json"
-train_image_directory = "/home/ethanschonfeld/cs236g/SpineGAN/stylegan2-ada-pytorch-main/abnormality_conditional_dataset/"
-
-train_gen_normal_directory = "/home/ethanschonfeld/cs236g/SpineGAN/domain_generated/normal/"
-train_gen_abnormal_directory = "/home/ethanschonfeld/cs236g/SpineGAN/domain_generated/abnormal/"
-
-
-# In[ ]:
-
-
-val_abnormality_directory = "/home/ethanschonfeld/cs236g/vindr/annotations/test.csv"
-val_image_directory = "/home/ethanschonfeld/cs236g/test_dataset/"
+#val_abnormality_directory = "/home/ethanschonfeld/cs236g/vindr/annotations/test.csv"
+val_abnormality_directory = args.val_labels
+#val_image_directory = "/home/ethanschonfeld/cs236g/test_dataset/"
+val_image_directory = args.val_images
 
 
 # In[ ]:
