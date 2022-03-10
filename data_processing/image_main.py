@@ -13,9 +13,17 @@ my_parser.add_argument('DICOM',
 my_parser.add_argument('labels',
                        help='the path to csv of DICOM image labels for condition')
 
+my_parser.add_argument('save_0',
+                       help='the path to save directory for class 0')
+
+my_parser.add_argument('save_1',
+                       help='the path to save directory for class 1')
+
 
 # Execute the parse_args() method
 args = my_parser.parse_args()
+save_0 = args.save_0
+save_1 = args.save_1
 
 #local_directory = "/Users/ethanschonfeld/desktop/CS236G/data/train_images/"
 directory = args.DICOM
@@ -75,8 +83,8 @@ for file in os.listdir(directory):
     image_id = file[:-6]
     if bool(set(annotations.loc[:, "lesion_type"]) & set(annotations.loc[image_id, "lesion_type"])):
         print("To abnormal: ", image_id)
-        save_as_png(image=npy_image, file_directory="/home/ethanschonfeld/cs236g/training_data/abnormal/"+image_id+".png")
+        save_as_png(image=npy_image, file_directory="save_1"+image_id+".png")
     else:
-        save_as_png(image=npy_image, file_directory="/home/ethanschonfeld/cs236g/training_data/normal/"+image_id+".png")
+        save_as_png(image=npy_image, file_directory="save_0"+image_id+".png")
         print("To normal: ", image_id)
 
