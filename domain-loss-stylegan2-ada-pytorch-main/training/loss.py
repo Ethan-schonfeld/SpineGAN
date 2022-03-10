@@ -108,9 +108,9 @@ class StyleGAN2Loss(Loss):
                 loss_domain_function = torch.nn.BCELoss()
                 loss_domain = loss_domain_function(classifier_result, torch.from_numpy(gen_class).unsqueeze(1).to('cuda'))
                 
-                    # Here we use a hyperparameter of 0.05 to scale this domain SpineClassifier loss term determined empirically
+                    # Here we use a hyperparameter of 0.1 to scale this domain SpineClassifier loss term determined empirically
                 
-                scaled_loss_domain = torch.mul(loss_domain, 0.05)
+                scaled_loss_domain = torch.mul(loss_domain, 0.1)
                 
                 # Add domain loss term to traditional loss
                 
