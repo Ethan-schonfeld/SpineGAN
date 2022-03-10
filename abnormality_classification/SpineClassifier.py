@@ -41,15 +41,15 @@ train_gen_abnormal_directory = "/home/ethanschonfeld/cs236g/SpineGAN/domain_gene
 # In[ ]:
 
 
-test_abnormality_directory = "/home/ethanschonfeld/cs236g/vindr/annotations/test.csv"
-test_image_directory = "/home/ethanschonfeld/cs236g/test_dataset/"
+val_abnormality_directory = "/home/ethanschonfeld/cs236g/vindr/annotations/test.csv"
+val_image_directory = "/home/ethanschonfeld/cs236g/test_dataset/"
 
 
 # In[ ]:
 
 
 # these are the required transforms for Pytorch densenet model.
-# we will apply these to all training and testing images
+# we will apply these to all training and validation images
 preprocess = transforms.Compose([
     transforms.Resize(224),
     transforms.ToTensor(),
@@ -230,7 +230,7 @@ optimizer = optim.Adam(model.parameters(), lr=0.001)
 # About 42 min per epoch on CPU
 batch_size = 32
 num_batches = math.ceil(train_images.shape[0]/batch_size)
-best_test_auc_estimate = 0
+best_val_auc_estimate = 0
 
 for i in range(0, 10000): # they used 10000
     epoch_loss = 0.0
@@ -269,30 +269,30 @@ for i in range(0, 10000): # they used 10000
     print("Epoch ", i, " Train AUC estimation: ", sum(epoch_auc_estimation)/len(epoch_auc_estimation))
                 
     print("Epoch ", i, " loss: ", epoch_loss)
-    # get random sample of 600 of test images
-    total_num_test = int(test_images.shape[0])
+    # get random sample of 600 of val images
+    total_num_val = int(val_images.shape[0])
     # sample 600 without replacement
-    total_num_test = range(total_num_test)
-    random_sample = random.sample(total_num_test, 600)
-    test_batch = test_images[random_sample, :, :, :]
-    test_batch_labels = [test_labels[i] for i in random_sample]
-    test_batch_labels = torch.Tensor(test_batch_labels)
+    total_num_val = range(total_num_test)
+    random_sample = random.sample(total_num_val, 600)
+    val_batch = test_images[random_sample, :, :, :]
+    val_batch_labels = [test_labels[i] for i in random_sample]
+    val_batch_labels = torch.Tensor(test_batch_labels)
     
-    test_X = torch.empty(0, 3, 224, 224)
-    for image_number in range(test_batch.shape[0]):
-        tensor = preprocess(Image.fromarray(test_batch[image_number, :, :, :]))
+    val_X = torch.empty(0, 3, 224, 224)
+    for image_number in range(val_batch.shape[0]):
+        tensor = preprocess(Image.fromarray(val_batch[image_number, :, :, :]))
         tensor = tensor.unsqueeze(0)
-        test_X = torch.cat([test_X, tensor], dim=0)
+        val_X = torch.cat([test_X, tensor], dim=0)
     if torch.cuda.is_available():
-        test_X.to('cuda')
+        val_X.to('cuda')
     
     model.eval()
     with torch.no_grad():
-        test_outputs = model(test_X.to('cuda'))
-        test_auc = roc_auc_score(test_batch_labels.cpu().detach().numpy(), test_outputs.cpu().detach().numpy())
-    print("Epoch ", i, " Test Sample AUC: ", test_auc)
-    torch.save(model, checkpoint_path+"checkpoint_domainhidden_all_"+str(i)+".pt") # change name to include aug if using augmentation
-    if test_auc > best_test_auc_estimate:
-        best_test_auc_estimate = test_auc
-    #    torch.save(model, checkpoint_path+"checkpoint_aug_"+str(i)+".pt")
+        val_outputs = model(test_X.to('cuda'))
+        val_auc = roc_auc_score(test_batch_labels.cpu().detach().numpy(), test_outputs.cpu().detach().numpy())
+    print("Epoch ", i, " Val Sample AUC: ", val_auc)
+    #torch.save(model, checkpoint_path+"checkpoint_domainhidden_all_"+str(i)+".pt") # change name to include aug if using augmentation
+    if val_auc > best_val_auc_estimate:
+        best_val_auc_estimate = val_auc
+        torch.save(model, checkpoint_path+"checkpoint_aug_"+str(i)+".pt")
 
