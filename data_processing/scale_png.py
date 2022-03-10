@@ -12,8 +12,18 @@ import math
 
 # In[ ]:
 
+my_parser = argparse.ArgumentParser(description='Scale pixel intensities')
 
-directory = "/home/ethanschonfeld/cs236g/SpineGAN/stylegan2-ada-pytorch-main/abnormality_conditional_dataset"
+# Add the arguments
+my_parser.add_argument('directory',
+                       help='path to images')
+
+# Execute the parse_args() method
+args = my_parser.parse_args()
+
+directory = args.directory
+
+#directory = "/home/ethanschonfeld/cs236g/SpineGAN/stylegan2-ada-pytorch-main/abnormality_conditional_dataset"
 
 
 # In[ ]:
