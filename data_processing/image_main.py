@@ -2,22 +2,36 @@
 # coding: utf-8
 
 # In[3]:
+import argparse
+
+my_parser = argparse.ArgumentParser(description='Data Specifications')
+
+# Add the arguments
+my_parser.add_argument('DICOM',
+                       help='the path to DICOM image folder')
+
+my_parser.add_argument('labels',
+                       help='the path to csv of DICOM image labels for condition')
 
 
-local_directory = "/Users/ethanschonfeld/desktop/CS236G/data/train_images/"
+# Execute the parse_args() method
+args = my_parser.parse_args()
+
+#local_directory = "/Users/ethanschonfeld/desktop/CS236G/data/train_images/"
+directory = args.DICOM
 
 
 # In[4]:
 
 
-virtual_directory = "/home/ethanschonfeld/cs236g/vindr/train_images/"
+#virtual_directory = "/home/ethanschonfeld/cs236g/vindr/train_images/"
 
 
 # In[ ]:
 
 
-vindr_directory = "/home/ethanschonfeld/cs236g/vindr/"
-
+#vindr_directory = "/home/ethanschonfeld/cs236g/vindr/"
+vindr_directory = args.labels
 
 # In[6]:
 
@@ -32,7 +46,8 @@ import torch
 
 
 if torch.cuda.is_available():
-    directory = virtual_directory
+    #directory = virtual_directory
+    directory = directory
 else:
     directory = local_directory
 
@@ -40,7 +55,8 @@ else:
 # In[ ]:
 
 
-annotations = pd.read_csv(vindr_directory+"annotations/train.csv")
+#annotations = pd.read_csv(vindr_directory+"annotations/train.csv")
+annotations = pd.read_csv(vindr_directory)
 annotations.index = annotations.loc[:, "image_id"]
 
 
