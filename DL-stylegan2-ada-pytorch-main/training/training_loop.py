@@ -290,7 +290,7 @@ def training_loop(
                 for param in phase.module.parameters():
                     if param.grad is not None:
                         param.grad = param.grad.cuda() + (torch.randn(param.size()) * 0.02).cuda()
-                #nn.utils.clip_grad_norm_(phase.module.parameters(), max_norm=1.5, norm_type=2)
+                nn.utils.clip_grad_norm_(phase.module.parameters(), max_norm=1.5, norm_type=2)
                 phase.opt.step()
             if phase.end_event is not None:
                 phase.end_event.record(torch.cuda.current_stream(device))
