@@ -2,8 +2,7 @@
 
 ### Train and Generate images with SpineGAN, using a domain classifier supplemented loss
 
-Demonstrating the successful application of synthetic learning in spine surgery for training multi–center models with increased patient privacy![image](https://user-images.githubusercontent.com/62685800/230460506-dbcd5d20-d385-4649-a05d-b35d121fd1f9.png)
-
+### Demonstrating the successful application of synthetic learning in spine surgery for training multi–center models with increased patient privacy
 
 ### Abstract
 
