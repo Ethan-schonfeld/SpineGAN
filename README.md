@@ -4,8 +4,6 @@
 
 ### Demonstrating the successful application of synthetic learning in spine surgery for training multi–center models with increased patient privacy
 
-![image](https://user-images.githubusercontent.com/62685800/230460506-dbcd5d20-d385-4649-a05d-b35d121fd1f9.png)
-
 ### Abstract
 
 Introduction: From real–time tumor classification to operative outcome prediction, applications of machine learning to neurosurgery are powerful. However, the translation of many of these applications are restricted by the lack of “big data” in neurosurgery. Important restrictions in patient privacy and sharing of imaging data reduce the diversity of the datasets used to train resulting models and therefore limit generalizability. Synthetic learning is a recent development in machine learning that generates synthetic data from real data and uses the synthetic data to train downstream models while preserving patient privacy. Such an approach has yet to be successfully demonstrated in the spine surgery domain.
